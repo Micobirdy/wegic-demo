@@ -13,9 +13,9 @@
     <div class="hero">
       <div class="hero-header">
         <div class="hero-header-left">
-          <img src="http://localhost:3845/assets/be182d8ad7687d3c3e662e2205aa57461e553877.svg" alt="logo" class="logo" />
+          <img src="./assets/be182d8ad7687d3c3e662e2205aa57461e553877.svg" alt="logo" class="logo" />
           <div class="nav">
-            <button class="nav-item" type="button">Best Practices</button>
+            <button class="nav-item selected" type="button">Best Practices</button>
             <button class="nav-item" type="button">Help Center</button>
             <button class="nav-item" type="button">Pricing</button>
           </div>
@@ -26,61 +26,159 @@
         </div>
       </div>
       <div class="hero-title">
-        <p>Magic Your Site,<br>Build & Run</p>
-      </div>
-      <div class="case-cards">
-        <div class="case-card">
-          <div class="case-card-img" style="background-image:url('http://localhost:3845/assets/abbe8790392df10a9c0239020b212bcbaef44c59.png')"></div>
-          <div class="case-card-info">
-            <span class="case-card-user">Kimmy</span>
-            <span class="case-card-country">🇺🇸</span>
-          </div>
-        </div>
-        <div class="case-card">
-          <div class="case-card-img" style="background-image:url('http://localhost:3845/assets/512b7c633d3e95e7ca63021ac7f5bae9ea258756.png')"></div>
-          <div class="case-card-info">
-            <span class="case-card-user">Kimmy</span>
-            <span class="case-card-country">🇺🇸</span>
-          </div>
-        </div>
-        <div class="case-card">
-          <div class="case-card-img" style="background-image:url('http://localhost:3845/assets/cba5f8c00d9b19527d581bb76eb25f2dd9269541.png')"></div>
-          <div class="case-card-info">
-            <span class="case-card-user">Kimmy</span>
-            <span class="case-card-country">🇺🇸</span>
-          </div>
-        </div>
-        <div class="case-card">
-          <div class="case-card-img" style="background-image:url('http://localhost:3845/assets/512b7c633d3e95e7ca63021ac7f5bae9ea258756.png')"></div>
-          <div class="case-card-info">
-            <span class="case-card-user">Kimmy</span>
-            <span class="case-card-country">🇺🇸</span>
-          </div>
-        </div>
+        <p>Magic Your Site<br>Build & Run</p>
       </div>
       <div class="chat-bar">
-        <div class="chat-bar-content">
-          <div class="chat-bar-title">
-            <p>👋 Hi there, I'm Wegic! </p>
-            <p>The AI Web Designer & Developer by Your Side.</p>
+        <div class="chat-bar-inner">
+          <div class="chat-bar-textarea">
+            <textarea class="chat-bar-input-real" id="chatInput" placeholder="Ask Wegic to create a web app that..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}"></textarea>
           </div>
-          <div class="chat-bar-input-frame" tabindex="0">
-            <input class="chat-bar-input-real" type="text" placeholder="Chat with wegic..." />
-            <div class="chat-bar-ref">
-              <img src="http://localhost:3845/assets/fd1cec4d2c573e8ee41eeddabda6327bc65965cb.svg" class="chat-bar-icon" />
-              <span class="chat-bar-ref-label">Reference:</span>
-              <span class="chat-bar-ref-content">Help me design a photographer's portfolio website.</span>
+          <div class="chat-bar-controls">
+            <div class="website-type-selector" onclick="toggleDropdown()">
+              <img src="./assets/globe-icon.svg" class="globe-icon" alt="globe" />
+              <span class="website-type-label">website type: <span id="selectedType">Auto</span></span>
+              <img src="./assets/chevron-down-icon.svg" class="chevron-icon" alt="dropdown" />
+              <div class="dropdown-menu" id="dropdownMenu">
+                <div class="dropdown-option selected" data-value="Auto">
+                  <div class="option-main">
+                    <span class="option-title">Auto</span>
+                  </div>
+                  <div class="option-subtitle">Agent will choose for you</div>
+                </div>
+                <div class="dropdown-option" data-value="Modern web app">
+                  <div class="option-main">
+                    <span class="option-title">Modern web app</span>
+                  </div>
+                  <div class="option-subtitle">Made with React and Node.js</div>
+                </div>
+                <div class="dropdown-option" data-value="Interactive data app">
+                  <div class="option-main">
+                    <span class="option-title">Interactive data app</span>
+                  </div>
+                  <div class="option-subtitle">Made with Streamlit and Python</div>
+                </div>
+                <div class="dropdown-option" data-value="Web app">
+                  <div class="option-main">
+                    <span class="option-title">Web app</span>
+                  </div>
+                  <div class="option-subtitle">Websites with Python backend</div>
+                </div>
+              </div>
             </div>
+            <button class="chat-bar-send-btn" type="button" onclick="sendChat()">
+              <span class="chat-bar-send-btn-bg"></span>
+              <img src="./assets/send-icon.svg" class="chat-bar-send-icon" alt="send" />
+            </button>
           </div>
-          <button class="chat-bar-btn" type="button">
-            <img src="http://localhost:3845/assets/8b79510b152145dbbbed5ae11cc4a35ce1012651.svg" />
-          </button>
-          <div class="chat-bar-divider">
-            <img src="http://localhost:3845/assets/c451903ee386303e23e6fb5113988b905100d5a5.svg" />
+        </div>
+        <div class="chat-bar-border"></div>
+      </div>
+      <div class="community-section">
+        <div class="community-header">
+          <h2 class="community-title">Community Projects</h2>
+          <div class="community-categories">
+            <button class="community-category-btn">Online education platform</button>
+            <button class="community-category-btn">E-commerce product page</button>
+            <button class="community-category-btn">Game community</button>
+            <button class="community-category-btn">Product display page</button>
+            <button class="community-category-btn">Design studio</button>
+          </div>
+        </div>
+      </div>
+      <div class="case-cards">
+        <div class="case-card" onclick="goToGenerate()">
+          <div class="case-card-img" style="background-image:url('./assets/abbe8790392df10a9c0239020b212bcbaef44c59.png')"></div>
+          <div class="case-card-info">
+            <span class="case-card-user">Kimmy</span>
+            <span class="case-card-country">🇺🇸</span>
+          </div>
+        </div>
+        <div class="case-card" onclick="goToGenerate()">
+          <div class="case-card-img" style="background-image:url('./assets/512b7c633d3e95e7ca63021ac7f5bae9ea258756.png')"></div>
+          <div class="case-card-info">
+            <span class="case-card-user">Kimmy</span>
+            <span class="case-card-country">🇺🇸</span>
+          </div>
+        </div>
+        <div class="case-card" onclick="goToGenerate()">
+          <div class="case-card-img" style="background-image:url('./assets/cba5f8c00d9b19527d581bb76eb25f2dd9269541.png')"></div>
+          <div class="case-card-info">
+            <span class="case-card-user">Kimmy</span>
+            <span class="case-card-country">🇺🇸</span>
+          </div>
+        </div>
+        <div class="case-card" onclick="goToGenerate()">
+          <div class="case-card-img" style="background-image:url('./assets/512b7c633d3e95e7ca63021ac7f5bae9ea258756.png')"></div>
+          <div class="case-card-info">
+            <span class="case-card-user">Kimmy</span>
+            <span class="case-card-country">🇺🇸</span>
           </div>
         </div>
       </div>
     </div>
   </div>
+<script>
+function sendChat() {
+  var val = document.getElementById('chatInput').value;
+  if(val.trim()) {
+    // 立即跳转到生成页面，减少延迟
+    window.location.replace('generate.html');
+  }
+}
+
+function toggleDropdown() {
+  const dropdown = document.getElementById('dropdownMenu');
+  dropdown.classList.toggle('show');
+}
+
+function selectOption(value) {
+  // 更新选中的文本
+  document.getElementById('selectedType').textContent = value;
+  
+  // 关闭下拉菜单
+  const dropdown = document.getElementById('dropdownMenu');
+  dropdown.classList.remove('show');
+  
+  // 更新选中状态
+  document.querySelectorAll('.dropdown-option').forEach(option => {
+    option.classList.remove('selected');
+    if (option.dataset.value === value) {
+      option.classList.add('selected');
+    }
+  });
+  
+  // 添加调试信息
+  console.log('选中选项:', value);
+  console.log('下拉菜单已关闭');
+}
+
+// 点击外部关闭下拉菜单
+document.addEventListener('click', function(event) {
+  const dropdown = document.getElementById('dropdownMenu');
+  const selector = document.querySelector('.website-type-selector');
+  
+  if (!selector.contains(event.target)) {
+    dropdown.classList.remove('show');
+    console.log('点击外部，下拉菜单已关闭');
+  }
+});
+
+// 为下拉选项添加点击事件
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.dropdown-option').forEach(option => {
+    option.addEventListener('click', function(e) {
+      e.stopPropagation(); // 阻止事件冒泡
+      const value = this.dataset.value;
+      console.log('点击了选项:', value);
+      selectOption(value);
+    });
+  });
+});
+
+// 跳转到生成页面
+function goToGenerate() {
+  window.location.replace('generate.html');
+}
+</script>
 </body>
 </html> 

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wegic - 生成中</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:wght@900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="generate.css" />
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- 左侧预览区域 -->
+    <div class="visual-preview">
+      <div class="preview-header">
+        <span class="preview-label">Visual preview</span>
+      </div>
+      <div class="preview-content">
+        <div class="preview-placeholder">
+          <div class="placeholder-text">Your website will appear here...</div>
+          <div class="loading-indicator">
+            <div class="loading-icon">
+              <img src="./assets/小绿.svg" alt="小绿" style="width: 24px; height: 24px;" />
+            </div>
+            <span class="loading-text">Designing visual preview</span>
+          </div>
+        </div>
+        <div class="preview-website" id="previewWebsite" style="display: none;">
+          <!-- 生成的网站内容将在这里显示 -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧助手面板 -->
+    <div class="assistant-panel">
+      <div class="assistant-header">
+        <div class="diff-section">
+          <span class="diff-icon">🔍</span>
+          <span class="diff-text">Diff</span>
+        </div>
+        <div class="help-icon">?</div>
+      </div>
+
+      <div class="assistant-content">
+        <div class="status-item">
+          <div class="status-icon">
+            <img src="./assets/小绿.svg" alt="小绿" style="width: 16px; height: 16px;" />
+          </div>
+          <span class="status-text">制定实施计划...</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="search-box">
+          <div class="search-websites">
+            <div class="website-icon website-1" style="background-image: url('./assets/512b7c633d3e95e7ca63021ac7f5bae9ea258756.png')"></div>
+            <div class="website-icon website-2" style="background-image: url('./assets/abbe8790392df10a9c0239020b212bcbaef44c59.png')"></div>
+            <div class="website-icon website-3" style="background-image: url('./assets/cba5f8c00d9b19527d581bb76eb25f2dd9269541.png')"></div>
+          </div>
+          <span class="search-text">检索中...</span>
+        </div>
+
+        <div class="assistant-message">
+          <p>我理解您想要建立一个房地产投资网站来吸引投资者。让我为您创建一个专业的房地产投资平台计划，包括完整的内容设计：</p>
+        </div>
+
+        <div class="version-section">
+          <div class="version-header">
+            <span class="version-title">初始版本?</span>
+            <span class="version-icon">?</span>
+          </div>
+          <div class="version-content">
+            <div class="content-placeholder" id="content1"></div>
+            <div class="content-placeholder" id="content2"></div>
+            <div class="content-placeholder" id="content3"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="assistant-footer">
+        <div class="footer-text">准备好了吗?当你准备好了,开始生成这个计划。</div>
+        <div class="footer-buttons">
+          <button class="pause-btn" onclick="pauseGeneration()">暂停</button>
+          <button class="generate-btn" onclick="startGeneration()">开始生成</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="generate.js"></script>
+  <script>
+    // 确保页面加载完成
+    window.addEventListener('load', function() {
+      console.log('页面完全加载完成');
+      document.body.style.visibility = 'visible';
+    });
+  </script>
+</body>
+</html> 
