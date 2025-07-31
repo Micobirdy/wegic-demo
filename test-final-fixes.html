@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>测试 - 最终修复验证</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #000;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .test-container {
+      width: 440px;
+      background: #111;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding: 12px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+    }
+    
+    .status-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .status-icon img {
+      width: 16px;
+      height: 16px;
+      filter: brightness(1.2);
+    }
+    
+    .status-text {
+      font-size: 14px;
+      color: rgba(255,255,255,0.9);
+      font-weight: 500;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #10b981, #34d399);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+    
+    .preview-section {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+    }
+    
+    .preview-placeholder {
+      text-align: center;
+      padding: 40px 20px;
+      color: rgba(255,255,255,0.6);
+    }
+    
+    .preview-website {
+      display: none;
+    }
+    
+    .preview-website img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    
+    .debug-info {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    
+    .debug-info h4 {
+      margin: 0 0 10px 0;
+      color: #10b981;
+    }
+    
+    .debug-info ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    
+    .debug-info li {
+      margin-bottom: 5px;
+    }
+    
+    .test-btn {
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 5px;
+      font-size: 14px;
+    }
+    
+    .test-btn:hover {
+      background: #059669;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h3>测试 - 最终修复验证</h3>
+    
+    <div class="status-item">
+      <div class="status-icon">
+        <img src="./assets/小绿.svg" alt="小绿" style="width: 16px; height: 16px;" />
+      </div>
+      <span class="status-text" id="statusText">生...</span>
+    </div>
+    
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    
+    <div class="preview-section">
+      <h4>左侧预览区域</h4>
+      <div class="preview-placeholder" id="previewPlaceholder">
+        <div>Your website will appear here...</div>
+        <div style="margin-top: 10px;">
+          <img src="./assets/小绿.svg" alt="小绿" style="width: 24px; height: 24px;" />
+          <div style="margin-top: 5px; font-size: 12px;">Designing visual preview</div>
+        </div>
+      </div>
+      <div class="preview-website" id="previewWebsite">
+        <img src="./assets/左侧显示.png" alt="生成的网站预览" style="width: 100%; height: auto; border-radius: 8px;" />
+      </div>
+    </div>
+    
+    <div style="margin-top: 20px;">
+      <button class="test-btn" onclick="testProgress()">测试进度条</button>
+      <button class="test-btn" onclick="testStatusMessages()">测试状态文案</button>
+      <button class="test-btn" onclick="testPreview()">测试预览显示</button>
+    </div>
+    
+    <div class="debug-info">
+      <h4>修复验证清单</h4>
+      <ul>
+        <li>✅ 左侧显示图片已嵌入</li>
+        <li>✅ 进度条完成后再显示左侧网页</li>
+        <li>✅ 生成中提示文案已优化为更人性化</li>
+        <li>✅ 状态文案：生... → 生成中... → 生成完成... → 验证完成... → 完成... → 完成！</li>
+        <li>✅ 只有在100%完成时才显示左侧图片</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    let currentProgress = 0;
+    let currentStep = 0;
+    
+    const statusMessages = [
+      '生...',
+      '生成中...',
+      '生成完成...',
+      '验证完成...',
+      '完成...',
+      '完成！',
+      '完成！'
+    ];
+    
+    function testProgress() {
+      currentProgress = 0;
+      currentStep = 0;
+      updateProgress(0);
+      updateStatus('生...');
+      
+      const interval = setInterval(() => {
+        currentProgress += 15;
+        updateProgress(currentProgress);
+        
+        if (currentStep < statusMessages.length) {
+          updateStatus(statusMessages[currentStep]);
+          currentStep++;
+        }
+        
+        if (currentProgress >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            showPreview();
+          }, 500);
+        }
+      }, 1000);
+    }
+    
+    function updateProgress(progress) {
+      const progressFill = document.getElementById('progressFill');
+      if (progressFill) {
+        progressFill.style.width = `${progress}%`;
+      }
+    }
+    
+    function updateStatus(message) {
+      const statusText = document.getElementById('statusText');
+      if (statusText) {
+        statusText.textContent = message;
+      }
+    }
+    
+    function showPreview() {
+      const previewPlaceholder = document.getElementById('previewPlaceholder');
+      const previewWebsite = document.getElementById('previewWebsite');
+      
+      if (previewPlaceholder && previewWebsite) {
+        previewPlaceholder.style.display = 'none';
+        previewWebsite.style.display = 'block';
+        console.log('显示左侧预览图片');
+      }
+    }
+    
+    function testStatusMessages() {
+      let index = 0;
+      const interval = setInterval(() => {
+        if (index < statusMessages.length) {
+          updateStatus(statusMessages[index]);
+          index++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 1000);
+    }
+    
+    function testPreview() {
+      showPreview();
+    }
+  </script>
+</body>
+</html> 

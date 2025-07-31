@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>测试 - 左侧滚动功能</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    .page-wrapper {
+      display: flex;
+      height: 100vh;
+      position: relative;
+    }
+    
+    .visual-preview {
+      flex: 1;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: width;
+    }
+    
+    .visual-preview.compressed {
+      width: calc(100vw - 440px);
+    }
+    
+    .preview-header {
+      padding: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .preview-label {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 500;
+    }
+    
+    .preview-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      overflow: hidden;
+    }
+    
+    .preview-placeholder {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: calc(100vh - 120px);
+    }
+    
+    .placeholder-text {
+      font-size: 18px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 20px;
+    }
+    
+    .loading-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .loading-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .loading-icon img {
+      width: 24px;
+      height: 24px;
+      filter: brightness(1.2);
+    }
+    
+    .loading-text {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+    }
+    
+    .preview-website {
+      width: 100%;
+      height: calc(100vh - 120px);
+      background: #fff;
+      color: #000;
+      overflow-y: auto;
+      overflow-x: hidden;
+      border-radius: 8px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0,0,0,0.3) transparent;
+      scroll-behavior: smooth;
+      position: relative;
+    }
+    
+    .preview-website::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .preview-website::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    .preview-website::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.3);
+      border-radius: 3px;
+    }
+    
+    .preview-website::-webkit-scrollbar-thumb:hover {
+      background: rgba(0,0,0,0.5);
+    }
+    
+    .preview-website::after {
+      content: '↓';
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 20px;
+      height: 20px;
+      background: rgba(0,0,0,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: rgba(0,0,0,0.5);
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    
+    .assistant-panel {
+      position: absolute;
+      top: 0;
+      right: -440px;
+      width: 440px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #111;
+      border-left: 1px solid rgba(255,255,255,0.1);
+      transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 2;
+      will-change: right;
+      overflow: hidden;
+    }
+    
+    .assistant-panel.slide-in {
+      right: 0;
+    }
+    
+    .test-controls {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+    
+    .test-btn {
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 5px;
+      font-size: 12px;
+    }
+    
+    .test-btn:hover {
+      background: #059669;
+    }
+    
+    .debug-info {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.8);
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 12px;
+      max-width: 300px;
+    }
+    
+    .debug-info h4 {
+      margin: 0 0 10px 0;
+      color: #10b981;
+    }
+    
+    .debug-info ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    
+    .debug-info li {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="visual-preview" id="visualPreview">
+      <div class="preview-header">
+        <span class="preview-label">Visual preview</span>
+      </div>
+      <div class="preview-content">
+        <div class="preview-placeholder" id="previewPlaceholder">
+          <div class="placeholder-text">Your website will appear here...</div>
+          <div class="loading-indicator">
+            <div class="loading-icon">
+              <img src="./assets/小绿.svg" alt="小绿" style="width: 24px; height: 24px;" />
+            </div>
+            <span class="loading-text">Designing visual preview</span>
+          </div>
+        </div>
+        <div class="preview-website" id="previewWebsite" style="display: none;">
+          <img src="./assets/左侧显示.png" alt="生成的网站预览" style="width: 100%; height: auto; border-radius: 8px;" />
+        </div>
+      </div>
+    </div>
+    
+    <div class="assistant-panel" id="assistantPanel">
+      <div style="padding: 20px; color: rgba(255,255,255,0.8);">
+        <h3>右侧面板</h3>
+        <p>这里是右侧助手面板的内容...</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="test-controls">
+    <button class="test-btn" onclick="togglePanel()">切换右侧面板</button>
+    <button class="test-btn" onclick="showPreview()">显示预览</button>
+    <button class="test-btn" onclick="hidePreview()">隐藏预览</button>
+    <button class="test-btn" onclick="testScroll()">测试滚动</button>
+  </div>
+  
+  <div class="debug-info">
+    <h4>滚动功能测试</h4>
+    <ul>
+      <li>✅ 左侧预览区域支持上下滚动</li>
+      <li>✅ 自定义滚动条样式</li>
+      <li>✅ 滚动提示箭头</li>
+      <li>✅ 平滑滚动效果</li>
+      <li>✅ 高度自适应</li>
+    </ul>
+  </div>
+
+  <script>
+    function togglePanel() {
+      const panel = document.getElementById('assistantPanel');
+      const preview = document.getElementById('visualPreview');
+      
+      if (panel.classList.contains('slide-in')) {
+        panel.classList.remove('slide-in');
+        preview.classList.remove('compressed');
+      } else {
+        panel.classList.add('slide-in');
+        preview.classList.add('compressed');
+      }
+    }
+    
+    function showPreview() {
+      const placeholder = document.getElementById('previewPlaceholder');
+      const website = document.getElementById('previewWebsite');
+      
+      if (placeholder && website) {
+        placeholder.style.display = 'none';
+        website.style.display = 'block';
+      }
+    }
+    
+    function hidePreview() {
+      const placeholder = document.getElementById('previewPlaceholder');
+      const website = document.getElementById('previewWebsite');
+      
+      if (placeholder && website) {
+        placeholder.style.display = 'flex';
+        website.style.display = 'none';
+      }
+    }
+    
+    function testScroll() {
+      const website = document.getElementById('previewWebsite');
+      if (website) {
+        // 滚动到底部
+        website.scrollTo({
+          top: website.scrollHeight,
+          behavior: 'smooth'
+        });
+        
+        // 2秒后滚动到顶部
+        setTimeout(() => {
+          website.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        }, 2000);
+      }
+    }
+    
+    // 页面加载完成后自动显示右侧面板
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        togglePanel();
+      }, 1000);
+    });
+  </script>
+</body>
+</html> 

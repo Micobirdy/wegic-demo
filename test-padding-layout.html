@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>测试 - 右侧Padding布局</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow: hidden;
+    }
+    
+    .page-wrapper {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .visual-preview {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #000;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1;
+      will-change: width;
+    }
+    
+    .visual-preview.compressed {
+      width: calc(100vw - 440px);
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .preview-header {
+      padding: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .preview-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+    }
+    
+    .preview-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    
+    .placeholder-text {
+      font-size: 18px;
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+    }
+    
+    .assistant-panel {
+      position: absolute;
+      top: 0;
+      right: -440px;
+      width: 440px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #111;
+      border-left: 1px solid rgba(255,255,255,0.1);
+      transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 2;
+      will-change: right;
+      overflow: hidden;
+    }
+    
+    .assistant-panel.slide-in {
+      right: 0;
+    }
+    
+    .assistant-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .diff-section {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .diff-icon {
+      font-size: 16px;
+      color: #a855f7;
+    }
+    
+    .diff-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+    }
+    
+    .help-icon {
+      font-size: 18px;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+    }
+    
+    .assistant-content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      width: 100%;
+      box-sizing: border-box;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.3) transparent;
+    }
+    
+    .assistant-content::-webkit-scrollbar {
+      width: 4px;
+    }
+    
+    .assistant-content::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    .assistant-content::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.3);
+      border-radius: 2px;
+    }
+    
+    .assistant-content::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.5);
+    }
+    
+    .test-content {
+      margin-bottom: 20px;
+      padding: 20px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .test-content h3 {
+      margin: 0 0 10px 0;
+      font-size: 16px;
+      color: rgba(255,255,255,0.9);
+    }
+    
+    .test-content p {
+      margin: 0;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+    }
+    
+    .assistant-footer {
+      padding: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      margin: 20px;
+      width: calc(100% - 40px);
+      box-sizing: border-box;
+    }
+    
+    .footer-text {
+      font-size: 14px;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 16px;
+      text-align: center;
+      line-height: 1.4;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    
+    .footer-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    .pause-btn {
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      min-width: 80px;
+      flex: 1;
+      max-width: 50%;
+    }
+    
+    .pause-btn:hover {
+      background: rgba(255,255,255,0.15);
+    }
+    
+    .generate-btn {
+      background: #fff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      min-width: 100px;
+      flex: 1;
+      max-width: 50%;
+    }
+    
+    .generate-btn:hover {
+      background: #f5f5f5;
+    }
+    
+    .toggle-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #fff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- 左侧预览区域 -->
+    <div class="visual-preview" id="visualPreview">
+      <div class="preview-header">
+        <span class="preview-label">Visual preview</span>
+      </div>
+      <div class="preview-content">
+        <div class="placeholder-text">左侧预览区域</div>
+      </div>
+    </div>
+
+    <!-- 右侧助手面板 -->
+    <div class="assistant-panel" id="assistantPanel">
+      <div class="assistant-header">
+        <div class="diff-section">
+          <span class="diff-icon">🔍</span>
+          <span class="diff-text">Diff</span>
+        </div>
+        <div class="help-icon">?</div>
+      </div>
+
+      <div class="assistant-content">
+        <div class="test-content">
+          <h3>测试内容 1</h3>
+          <p>这是第一个测试内容块，用于验证padding和布局效果。</p>
+        </div>
+        
+        <div class="test-content">
+          <h3>测试内容 2</h3>
+          <p>这是第二个测试内容块，包含更多的文本内容来测试自适应效果。</p>
+        </div>
+        
+        <div class="test-content">
+          <h3>测试内容 3</h3>
+          <p>这是第三个测试内容块，用于验证右侧padding是否正确应用。</p>
+        </div>
+        
+        <div class="test-content">
+          <h3>测试内容 4</h3>
+          <p>这是第四个测试内容块，包含更长的文本内容来测试文本换行和自适应效果。</p>
+        </div>
+        
+        <div class="test-content">
+          <h3>测试内容 5</h3>
+          <p>这是第五个测试内容块，用于验证滚动条和内容显示效果。</p>
+        </div>
+      </div>
+
+      <div class="assistant-footer">
+        <div class="footer-text">💡 检查计划及视觉预览。如果一切看起来都很好，点击开始构建。您也可以通过与我聊天进行修改～</div>
+        <div class="footer-buttons">
+          <button class="pause-btn">继续对话</button>
+          <button class="generate-btn">开始生成</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="toggle-btn" onclick="togglePanel()">切换面板</button>
+
+  <script>
+    function togglePanel() {
+      const panel = document.getElementById('assistantPanel');
+      const preview = document.getElementById('visualPreview');
+      
+      if (panel.classList.contains('slide-in')) {
+        panel.classList.remove('slide-in');
+        preview.classList.remove('compressed');
+      } else {
+        panel.classList.add('slide-in');
+        preview.classList.add('compressed');
+      }
+    }
+    
+    // 页面加载后自动显示面板
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        togglePanel();
+      }, 500);
+    });
+  </script>
+</body>
+</html> 

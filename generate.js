@@ -81,6 +81,10 @@ function startSearchProcess() {
   
   if (searchBox) {
     searchBox.style.display = 'flex';
+    // 添加动效
+    setTimeout(() => {
+      searchBox.classList.add('show');
+    }, 100);
   }
   
   // 模拟检索过程
@@ -107,23 +111,25 @@ function startSearchProcess() {
 function showOtherUI() {
   console.log('显示其他UI元素');
   
-  // 显示状态项
-  const statusItem = document.querySelector('.status-item');
-  if (statusItem) {
-    statusItem.style.display = 'flex';
-  }
+  // 依次显示UI元素，每个间隔300ms
+  const uiElements = [
+    { selector: '.status-item', display: 'flex' },
+    { selector: '.assistant-message', display: 'block' },
+    { selector: '.version-section', display: 'flex' }
+  ];
   
-  // 显示助手消息
-  const assistantMessage = document.querySelector('.assistant-message');
-  if (assistantMessage) {
-    assistantMessage.style.display = 'block';
-  }
-  
-  // 显示版本部分
-  const versionSection = document.querySelector('.version-section');
-  if (versionSection) {
-    versionSection.style.display = 'flex';
-  }
+  uiElements.forEach((element, index) => {
+    setTimeout(() => {
+      const el = document.querySelector(element.selector);
+      if (el) {
+        el.style.display = element.display;
+        // 添加动效
+        setTimeout(() => {
+          el.classList.add('show');
+        }, 50);
+      }
+    }, index * 300);
+  });
   
   // 延迟后开始生成过程
   setTimeout(() => {
@@ -144,7 +150,7 @@ function startAutoGeneration() {
   const pauseBtn = document.querySelector('.pause-btn');
   generateBtn.disabled = true;
   generateBtn.textContent = '生成中...';
-  pauseBtn.textContent = '暂停';
+  pauseBtn.textContent = '继续对话';
   
   // 更新底部文本
   const footerText = document.querySelector('.footer-text');
@@ -162,18 +168,17 @@ function startGeneration() {
   startAutoGeneration();
 }
 
-// 暂停生成
+// 继续对话
 function pauseGeneration() {
-  if (!isGenerating) return;
-  
-  isGenerating = false;
+  // 这里可以添加继续对话的逻辑
+  console.log('继续对话功能');
   
   // 更新按钮状态
   const generateBtn = document.querySelector('.generate-btn');
   const pauseBtn = document.querySelector('.pause-btn');
   generateBtn.disabled = false;
-  generateBtn.textContent = '继续生成';
-  pauseBtn.textContent = '已暂停';
+  generateBtn.textContent = '开始生成';
+  pauseBtn.textContent = '继续对话';
   
   // 清除定时器
   if (generationTimer) {
@@ -185,13 +190,14 @@ function pauseGeneration() {
 // 生成过程
 function startGenerationProcess() {
   const steps = [
-    { progress: 10, message: '正在分析需求...', duration: 800 },
-    { progress: 25, message: '检索相关模板...', duration: 1000 },
-    { progress: 40, message: '设计页面结构...', duration: 900 },
-    { progress: 60, message: '生成内容...', duration: 1000 },
-    { progress: 80, message: '优化用户体验...', duration: 800 },
-    { progress: 95, message: '完成生成...', duration: 600 },
-    { progress: 100, message: '生成完成！', duration: 400 }
+    { progress: 5, message: '生...', duration: 1200 },
+    { progress: 15, message: '生成中...', duration: 1500 },
+    { progress: 30, message: '生成完成...', duration: 1200 },
+    { progress: 45, message: '验证完成...', duration: 1500 },
+    { progress: 60, message: '设计风格...', duration: 1200 },
+    { progress: 75, message: '编辑优化...', duration: 1200 },
+    { progress: 90, message: '完成...', duration: 1000 },
+    { progress: 100, message: '完成！', duration: 800 }
   ];
   
   let currentStep = 0;
@@ -212,13 +218,26 @@ function startGenerationProcess() {
     // 更新状态消息
     updateStatus(step.message);
     
+    // 显示新的功能区块
+    if (step.progress >= 60) {
+      showDesignStyleSection();
+    }
+    
+    if (step.progress >= 75) {
+      showEditCountSection();
+    }
+    
+    if (step.progress >= 90) {
+      showCompletionFeedbackSection();
+    }
+    
     // 填充内容占位符
     if (step.progress >= 40 && step.progress < 80) {
       fillContentPlaceholders(step.progress);
     }
     
-    // 显示预览
-    if (step.progress >= 60) {
+    // 显示预览 - 只在100%完成时显示
+    if (step.progress >= 100) {
       showPreview();
     }
     
@@ -265,8 +284,11 @@ function updateProgress(progress) {
       searchText.textContent = '检索中...';
     } else if (progress < 60) {
       searchText.textContent = '生成中...';
-    } else {
+    } else if (progress < 90) {
       searchText.textContent = '优化中...';
+    } else {
+      // 检索完成后隐藏文本
+      searchText.style.display = 'none';
     }
   }
 }
@@ -275,42 +297,93 @@ function updateProgress(progress) {
 function updateSearchStatus(status) {
   const searchText = document.querySelector('.search-text');
   if (searchText) {
-    searchText.textContent = status;
+    if (status === '检索完成') {
+      // 检索完成后隐藏文本
+      searchText.style.display = 'none';
+    } else {
+      searchText.textContent = status;
+    }
   }
 }
 
-// 填充内容占位符
+// 显示设计风格区块
+function showDesignStyleSection() {
+  const designSection = document.querySelector('.design-style-section');
+  if (designSection && !designSection.classList.contains('show')) {
+    designSection.style.display = 'block';
+    // 延迟添加show类以触发动画
+    setTimeout(() => {
+      designSection.classList.add('show');
+    }, 50);
+    console.log('显示设计风格区块');
+  }
+}
+
+// 显示编辑次数区块
+function showEditCountSection() {
+  const editSection = document.querySelector('.edit-count-section');
+  if (editSection && !editSection.classList.contains('show')) {
+    editSection.style.display = 'block';
+    // 延迟添加show类以触发动画
+    setTimeout(() => {
+      editSection.classList.add('show');
+    }, 50);
+    console.log('显示编辑次数区块');
+  }
+}
+
+// 显示完成反馈区块
+function showCompletionFeedbackSection() {
+  const feedbackSection = document.querySelector('.completion-feedback-section');
+  if (feedbackSection && !feedbackSection.classList.contains('show')) {
+    feedbackSection.style.display = 'block';
+    // 延迟添加show类以触发动画
+    setTimeout(() => {
+      feedbackSection.classList.add('show');
+    }, 50);
+    console.log('显示完成反馈区块');
+  }
+}
+
+// 填充内容占位符 - 现在内容已经直接写在HTML中，不需要动态填充
 function fillContentPlaceholders(progress) {
-  const placeholders = document.querySelectorAll('.content-placeholder');
+  // 内容已经直接写在HTML中，这里可以添加一些动画效果
+  const contentItems = document.querySelectorAll('.content-item');
   
   if (progress >= 40 && progress < 60) {
-    placeholders[0].classList.add('filled');
-    placeholders[0].innerHTML = `
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <img src="./assets/小绿.svg" alt="小绿" style="width: 16px; height: 16px;" />
-        <span style="color: rgba(255,255,255,0.8); font-size: 14px;">首页设计 - 响应式布局，现代化UI</span>
-      </div>
-    `;
+    if (contentItems[0]) {
+      contentItems[0].classList.add('visible');
+    }
   }
   
   if (progress >= 50 && progress < 70) {
-    placeholders[1].classList.add('filled');
-    placeholders[1].innerHTML = `
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <img src="./assets/小绿.svg" alt="小绿" style="width: 16px; height: 16px;" />
-        <span style="color: rgba(255,255,255,0.8); font-size: 14px;">投资产品展示 - 数据可视化，交互式图表</span>
-      </div>
-    `;
+    if (contentItems[1]) {
+      contentItems[1].classList.add('visible');
+    }
   }
   
   if (progress >= 60 && progress < 80) {
-    placeholders[2].classList.add('filled');
-    placeholders[2].innerHTML = `
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <img src="./assets/小绿.svg" alt="小绿" style="width: 16px; height: 16px;" />
-        <span style="color: rgba(255,255,255,0.8); font-size: 14px;">用户管理系统 - 注册登录，个人中心</span>
-      </div>
-    `;
+    if (contentItems[2]) {
+      contentItems[2].classList.add('visible');
+    }
+  }
+  
+  if (progress >= 70 && progress < 90) {
+    if (contentItems[3]) {
+      contentItems[3].classList.add('visible');
+    }
+  }
+  
+  if (progress >= 80 && progress < 100) {
+    if (contentItems[4]) {
+      contentItems[4].classList.add('visible');
+    }
+  }
+  
+  if (progress >= 90) {
+    if (contentItems[5]) {
+      contentItems[5].classList.add('visible');
+    }
   }
 }
 
@@ -322,11 +395,11 @@ function showPreview() {
   if (previewPlaceholder && previewWebsite) {
     // 只有在生成完成时才显示预览
     if (generationProgress >= 100) {
-      previewPlaceholder.style.display = 'none';
-      previewWebsite.style.display = 'block';
-      
-      // 生成预览内容
-      generatePreviewContent();
+    previewPlaceholder.style.display = 'none';
+    previewWebsite.style.display = 'block';
+    
+      // 不需要生成预览内容，因为已经直接嵌入图片
+      console.log('显示左侧预览图片');
     }
   }
 }
@@ -503,7 +576,7 @@ function completeGeneration() {
   const pauseBtn = document.querySelector('.pause-btn');
   generateBtn.disabled = false;
   generateBtn.textContent = '重新生成';
-  pauseBtn.textContent = '暂停';
+  pauseBtn.textContent = '继续对话';
   
   // 清除定时器
   if (generationTimer) {
@@ -517,11 +590,20 @@ function completeGeneration() {
   // 更新底部文本
   const footerText = document.querySelector('.footer-text');
   if (footerText) {
-    footerText.textContent = '网站生成完成！您可以查看预览效果。';
+    footerText.textContent = '💡 检查计划及视觉预览。如果一切看起来都很好，点击开始构建。您也可以通过与我聊天进行修改～';
   }
   
   // 显示左侧预览内容
   showPreview();
+  
+  // 显示底部对话框（从底部向上滑入）
+  setTimeout(() => {
+    const assistantFooter = document.querySelector('.assistant-footer');
+    if (assistantFooter) {
+      assistantFooter.classList.add('show');
+      console.log('显示底部对话框');
+    }
+  }, 500); // 延迟500ms显示，让预览先显示
   
   console.log('网站生成完成');
 }

@@ -9,81 +9,161 @@
   <link rel="stylesheet" href="generate.css" />
 </head>
 <body>
-  <div class="page-wrapper">
-    <!-- 左侧预览区域 -->
-    <div class="visual-preview">
-      <div class="preview-header">
-        <span class="preview-label">Visual preview</span>
-      </div>
-      <div class="preview-content">
-        <div class="preview-placeholder">
-          <div class="placeholder-text">Your website will appear here...</div>
-          <div class="loading-indicator">
-            <div class="loading-icon">
-              <img src="./assets/小绿.svg" alt="小绿" style="width: 24px; height: 24px;" />
+  <div class="main-container">
+    <div class="page-wrapper">
+      <!-- 左侧预览区域 -->
+      <div class="visual-preview">
+        <div class="preview-header">
+          <span class="preview-label">Visual preview</span>
+        </div>
+        <div class="preview-content">
+          <div class="preview-placeholder" id="previewPlaceholder">
+            <div class="placeholder-text">Your website will appear here...</div>
+            <div class="loading-indicator">
+              <div class="loading-icon">
+                <img src="./assets/小绿.svg" alt="小绿" style="width: 24px; height: 24px;" />
+              </div>
+              <span class="loading-text">Designing visual preview</span>
             </div>
-            <span class="loading-text">Designing visual preview</span>
           </div>
-        </div>
-        <div class="preview-website" id="previewWebsite" style="display: none;">
-          <!-- 生成的网站内容将在这里显示 -->
-        </div>
-      </div>
-    </div>
-
-    <!-- 右侧助手面板 -->
-    <div class="assistant-panel">
-      <div class="assistant-header">
-        <div class="diff-section">
-          <span class="diff-icon">🔍</span>
-          <span class="diff-text">Diff</span>
-        </div>
-        <div class="help-icon">?</div>
-      </div>
-
-      <div class="assistant-content">
-        <div class="status-item">
-          <div class="status-icon">
-            <img src="./assets/小绿.svg" alt="小绿" style="width: 16px; height: 16px;" />
-          </div>
-          <span class="status-text">制定实施计划...</span>
-        </div>
-
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-
-        <div class="search-box">
-          <div class="search-websites">
-            <div class="website-icon website-1" style="background-image: url('./assets/512b7c633d3e95e7ca63021ac7f5bae9ea258756.png')"></div>
-            <div class="website-icon website-2" style="background-image: url('./assets/abbe8790392df10a9c0239020b212bcbaef44c59.png')"></div>
-            <div class="website-icon website-3" style="background-image: url('./assets/cba5f8c00d9b19527d581bb76eb25f2dd9269541.png')"></div>
-          </div>
-          <span class="search-text">检索中...</span>
-        </div>
-
-        <div class="assistant-message">
-          <p>我理解您想要建立一个房地产投资网站来吸引投资者。让我为您创建一个专业的房地产投资平台计划，包括完整的内容设计：</p>
-        </div>
-
-        <div class="version-section">
-          <div class="version-header">
-            <span class="version-title">初始版本?</span>
-            <span class="version-icon">?</span>
-          </div>
-          <div class="version-content">
-            <div class="content-placeholder" id="content1"></div>
-            <div class="content-placeholder" id="content2"></div>
-            <div class="content-placeholder" id="content3"></div>
+          <div id="previewWebsite" style="display: none;" class="website-preview">
+            <img src="./assets/image 169.png" alt="生成的网站预览" style="width: 100%; height: auto; border-radius: 8px;" />
           </div>
         </div>
       </div>
 
-      <div class="assistant-footer">
-        <div class="footer-text">准备好了吗?当你准备好了,开始生成这个计划。</div>
-        <div class="footer-buttons">
-          <button class="pause-btn" onclick="pauseGeneration()">暂停</button>
-          <button class="generate-btn" onclick="startGeneration()">开始生成</button>
+      <!-- 右侧助手面板 -->
+      <div class="assistant-panel">
+        <div class="assistant-header">
+          <div class="diff-section">
+            <span class="diff-icon">🔍</span>
+            <span class="diff-text">Diff</span>
+          </div>
+          <div class="help-icon">?</div>
+        </div>
+
+        <div class="assistant-content">
+          <div class="status-item">
+            <div class="status-icon">
+              <img src="./assets/小绿.svg" alt="小绿" style="width: 16px; height: 16px;" />
+            </div>
+            <span class="status-text">制定实施计划...</span>
+          </div>
+
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+
+          <div class="search-box">
+            <div class="search-websites">
+              <div class="website-icon website-1" style="background-image: url('./assets/512b7c633d3e95e7ca63021ac7f5bae9ea258756.png')"></div>
+              <div class="website-icon website-2" style="background-image: url('./assets/abbe8790392df10a9c0239020b212bcbaef44c59.png')"></div>
+              <div class="website-icon website-3" style="background-image: url('./assets/cba5f8c00d9b19527d581bb76eb25f2dd9269541.png')"></div>
+              <div class="website-icon website-4" style="background-image: url('./assets/7ddacf2e6b71bd7b3376cfa6c684d60600871483.png')"></div>
+              <div class="website-icon website-5" style="background-image: url('./assets/image 141.png')"></div>
+            </div>
+            <span class="search-text">检索中...</span>
+          </div>
+
+          <div class="assistant-message">
+            <p>我理解您想要建立一个房地产投资网站来吸引投资者。让我为您创建一个专业的房地产投资平台计划，包括完整的内容设计：</p>
+          </div>
+
+          <div class="version-section">
+            <div class="version-header">
+              <div class="version-title">
+                <div class="title-icon">
+                  <img src="./assets/gettingStarted.svg" alt="初始版本" style="width: 16px; height: 16px;" />
+                </div>
+                <span>初始版本</span>
+              </div>
+              <div class="version-help">
+                <img src="http://localhost:3845/assets/30e7f0a89c85f030a9c4f1bcf07227413d41076b.svg" alt="帮助" style="width: 16px; height: 16px;" />
+              </div>
+            </div>
+            <div class="version-content">
+              <div class="content-item">
+                <div class="item-icon">
+                  <img src="http://localhost:3845/assets/efe7a09156e3e415fce6b0327fe180dafa7b62d2.svg" alt="tag1" style="width: 16px; height: 16px;" />
+                </div>
+                <span>Hero区域展示投资理念</span>
+              </div>
+              <div class="content-item">
+                <div class="item-icon">
+                  <span>✻</span>
+                </div>
+                <span>投资组合展示</span>
+              </div>
+              <div class="content-item">
+                <div class="item-icon">
+                  <span>✻</span>
+                </div>
+                <span>团队展示</span>
+              </div>
+              <div class="content-item">
+                <div class="item-icon">
+                  <span>✻</span>
+                </div>
+                <span>客户成功</span>
+              </div>
+              <div class="content-item">
+                <div class="item-icon">
+                  <img src="http://localhost:3845/assets/63d610fe72d86ed2aca078fcab0cd6b4d68638f0.svg" alt="tag2" style="width: 16px; height: 16px;" />
+                </div>
+                <span>关注领域介绍</span>
+              </div>
+              <div class="content-item">
+                <div class="item-icon">
+                  <img src="http://localhost:3845/assets/63d610fe72d86ed2aca078fcab0cd6b4d68638f0.svg" alt="tag2" style="width: 16px; height: 16px;" />
+                </div>
+                <span>联系方式</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 设计风格区块 -->
+          <div class="design-style-section" style="display: none;">
+            <div class="design-style-content">
+              <div class="design-icon">
+                <img src="./assets/edit.svg" alt="设计风格" style="width: 20px; height: 20px;" />
+              </div>
+              <div class="design-text">
+                <span>设计风格:深色专业主题,配以金色点缀,体现房产行业的权威感。</span>
+              </div>
+              <button class="design-dropdown-btn">
+                <svg width="20" height="20" viewBox="0 0 16 16" fill="none">
+                  <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <!-- 编辑次数区块 -->
+          <div class="edit-count-section" style="display: none;">
+            <div class="edit-count-content">
+              <div class="edit-icon">
+                <img src="./assets/edit 01.svg" alt="编辑反馈" style="width: 16px; height: 16px;" />
+              </div>
+              <span class="edit-text">进行了10次编辑</span>
+              <button class="edit-button">显示所有</button>
+            </div>
+          </div>
+          
+          <!-- 完成反馈区块 -->
+          <div class="completion-feedback-section" style="display: none;">
+            <div class="completion-text">
+              <span>已完成!我为您创建了一个专业的房地产市场投资网站,包</span>
+              <span>含完整的内容和现代化设计</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="assistant-footer">
+          <div class="footer-text">💡 检查计划及视觉预览。如果一切看起来都很好，点击开始构建。您也可以通过与我聊天进行修改～</div>
+          <div class="footer-buttons">
+            <button class="pause-btn" onclick="pauseGeneration()">继续对话</button>
+            <button class="generate-btn" onclick="startGeneration()">开始生成</button>
+          </div>
         </div>
       </div>
     </div>

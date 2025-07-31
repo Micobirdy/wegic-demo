@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>测试 - 图标和样式修改</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    .page-wrapper {
+      display: flex;
+      height: 100vh;
+      position: relative;
+    }
+    
+    .visual-preview {
+      display: flex;
+      width: 1070px;
+      height: 868px;
+      padding-bottom: 409px;
+      flex-direction: column;
+      align-items: center;
+      gap: 323px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #0E0F0F;
+    }
+    
+    .assistant-panel {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 440px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #111;
+      border-left: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+    }
+    
+    .assistant-content {
+      flex: 1;
+      padding: 20px 20px 20px 20px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    .assistant-content::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .assistant-content::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    .assistant-content::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+      border-radius: 3px;
+    }
+    
+    .assistant-content::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    
+    .version-section {
+      margin-bottom: 20px;
+      display: flex;
+      width: 100%;
+      max-width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      border: 1px solid #262626;
+      overflow: visible;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+    
+    .version-header {
+      display: flex;
+      padding: 12px 0;
+      justify-content: space-between;
+      align-items: center;
+      align-self: stretch;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    
+    .version-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .title-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .title-icon img {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .version-title span {
+      font-size: 15px;
+      color: #ffffff;
+      line-height: 24px;
+    }
+    
+    .version-help {
+      width: 24px;
+      height: 24px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed rgba(255,205,41,0.12);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    
+    .version-help img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+      flex-shrink: 0;
+      max-width: 16px;
+      max-height: 16px;
+      aspect-ratio: 1;
+      display: block;
+    }
+    
+    .version-content {
+      display: flex;
+      padding: 12px 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 6px;
+      align-self: stretch;
+    }
+    
+    .content-item {
+      display: flex;
+      padding: 8px 0;
+      gap: 8px;
+      align-items: center;
+      width: 100%;
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      min-height: 24px;
+    }
+    
+    .item-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #ffffff;
+    }
+    
+    .item-icon img {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .item-icon span {
+      font-size: 15px;
+      color: #ffffff;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .content-item span {
+      font-size: 15px;
+      color: #ffffff;
+      line-height: 24px;
+      white-space: nowrap;
+      overflow: visible;
+    }
+    
+    /* 设计风格区块 */
+    .design-style-section {
+      margin: 16px 0;
+      display: flex;
+      width: calc(394px - 20px);
+      max-width: calc(640px - 20px);
+      padding: 12px;
+      align-items: flex-start;
+      gap: 12px;
+      border-radius: 12px;
+      border: 1px solid #262626;
+      margin-right: 20px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .design-style-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      flex: 1;
+    }
+    
+    .design-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    
+    .design-icon img {
+      width: 16px;
+      height: 16px;
+      filter: brightness(0.6);
+    }
+    
+    .design-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+    }
+    
+    .design-text span {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.4;
+    }
+    
+    .design-dropdown-btn {
+      display: flex;
+      width: 24px;
+      height: 24px;
+      padding: 4px;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .design-dropdown-btn svg {
+      width: 16px;
+      height: 16px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    /* 编辑次数区块 */
+    .edit-count-section {
+      margin: 16px 0;
+      display: flex;
+      padding: 0 8px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .edit-count-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+    
+    .edit-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .edit-icon img {
+      width: 16px;
+      height: 16px;
+      filter: brightness(1);
+    }
+    
+    .edit-text {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      font-family: "PingFang SC";
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+      flex: 1;
+    }
+    
+    .edit-button {
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 6px;
+      flex-shrink: 0;
+      color: #ffffff;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .edit-button:hover {
+      background: rgba(255,255,255,0.15);
+    }
+    
+    /* 完成反馈区块 */
+    .completion-feedback-section {
+      margin: 16px 0;
+      padding: 12px 16px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .completion-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    
+    .completion-text span {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.4;
+    }
+    
+    .test-controls {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+    
+    .test-btn {
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 5px;
+      font-size: 12px;
+    }
+    
+    .test-btn:hover {
+      background: #059669;
+    }
+    
+    .debug-info {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.8);
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 12px;
+      max-width: 300px;
+    }
+    
+    .debug-info h4 {
+      margin: 0 0 10px 0;
+      color: #10b981;
+    }
+    
+    .debug-info ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    
+    .debug-info li {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="visual-preview">
+      <div style="padding: 40px; text-align: center;">
+        <h2>左侧预览区域</h2>
+        <p>使用 image 169.png 作为预览图片</p>
+        <img src="./assets/image 169.png" alt="网站预览" style="width: 80%; height: auto; border-radius: 8px; margin-top: 20px;" />
+      </div>
+    </div>
+    
+    <div class="assistant-panel">
+      <div class="assistant-content">
+        <div class="version-section">
+          <div class="version-header">
+            <div class="version-title">
+              <div class="title-icon">
+                <img src="./assets/gettingStarted.svg" alt="初始版本" style="width: 16px; height: 16px;" />
+              </div>
+              <span>初始版本</span>
+            </div>
+            <div class="version-help">
+              <img src="http://localhost:3845/assets/30e7f0a89c85f030a9c4f1bcf07227413d41076b.svg" alt="帮助" style="width: 16px; height: 16px;" />
+            </div>
+          </div>
+          <div class="version-content">
+            <div class="content-item">
+              <div class="item-icon">
+                <img src="http://localhost:3845/assets/efe7a09156e3e415fce6b0327fe180dafa7b62d2.svg" alt="tag1" style="width: 16px; height: 16px;" />
+              </div>
+              <span>Hero区域展示投资理念</span>
+            </div>
+            <div class="content-item">
+              <div class="item-icon">
+                <span>✻</span>
+              </div>
+              <span>投资组合展示</span>
+            </div>
+            <div class="content-item">
+              <div class="item-icon">
+                <span>✻</span>
+              </div>
+              <span>团队展示</span>
+            </div>
+            <div class="content-item">
+              <div class="item-icon">
+                <span>✻</span>
+              </div>
+              <span>客户成功</span>
+            </div>
+            <div class="content-item">
+              <div class="item-icon">
+                <img src="http://localhost:3845/assets/63d610fe72d86ed2aca078fcab0cd6b4d68638f0.svg" alt="tag2" style="width: 16px; height: 16px;" />
+              </div>
+              <span>关注领域介绍</span>
+            </div>
+            <div class="content-item">
+              <div class="item-icon">
+                <img src="http://localhost:3845/assets/63d610fe72d86ed2aca078fcab0cd6b4d68638f0.svg" alt="tag2" style="width: 16px; height: 16px;" />
+              </div>
+              <span>联系方式</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 设计风格区块 -->
+        <div class="design-style-section">
+          <div class="design-style-content">
+            <div class="design-icon">
+              <img src="./assets/edit.svg" alt="设计风格" style="width: 16px; height: 16px;" />
+            </div>
+            <div class="design-text">
+              <span>设计风格:深色专业主题,配以金色点缀,体现房产行业的权威感。</span>
+            </div>
+          </div>
+          <button class="design-dropdown-btn">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        
+        <!-- 编辑次数区块 -->
+        <div class="edit-count-section">
+          <div class="edit-count-content">
+            <div class="edit-icon">
+              <img src="./assets/edit 01.svg" alt="编辑反馈" style="width: 16px; height: 16px;" />
+            </div>
+            <span class="edit-text">进行了10次编辑</span>
+            <button class="edit-button">显示所有</button>
+          </div>
+        </div>
+        
+        <!-- 完成反馈区块 -->
+        <div class="completion-feedback-section">
+          <div class="completion-text">
+            <span>已完成!我为您创建了一个专业的房地产市场投资网站,包</span>
+            <span>含完整的内容和现代化设计</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="test-controls">
+    <button class="test-btn" onclick="toggleDesign()">切换设计风格</button>
+    <button class="test-btn" onclick="toggleEdit()">切换编辑次数</button>
+    <button class="test-btn" onclick="toggleFeedback()">切换完成反馈</button>
+  </div>
+  
+      <div class="debug-info">
+      <h4>图标和样式修改测试</h4>
+      <ul>
+        <li>✅ 初始版本：使用gettingStarted.svg，背景rgba(255,255,255,0.06)，描边#262626</li>
+        <li>✅ 设计风格：使用edit.svg，描边#262626</li>
+        <li>✅ 编辑反馈：使用edit 01.svg，新样式布局</li>
+        <li>✅ 完成反馈：无描边和底色</li>
+        <li>✅ 编辑反馈：PingFang SC字体，13px，白色文字</li>
+        <li>✅ 编辑反馈：圆角按钮样式，背景rgba(255,255,255,0.06)</li>
+        <li>✅ 图标尺寸：已调整为20px x 20px</li>
+        <li>✅ 设计风格：新布局，添加下拉按钮</li>
+        <li>✅ 设计风格：去掉白色色块，去掉阴影</li>
+        <li>✅ 编辑反馈：去掉背景和描边，字体0.6透明度</li>
+        <li>✅ 编辑反馈：添加"显示所有"按钮</li>
+        <li>✅ 图标尺寸：设计风格和编辑反馈图标调整为24px容器，16px图标</li>
+        <li>✅ 底部按钮：文案为"开始生成"，左右间距20px</li>
+        <li>✅ 设计风格：右侧增加20px间距</li>
+        <li>✅ 初始版本：修复标题图标尺寸为16px</li>
+        <li>✅ 左侧图片：更换为 image 169.png</li>
+        <li>✅ 左侧间距：左右上间距调整为20px</li>
+        <li>✅ 顶部标题：覆盖在生成的网站上，左右布局</li>
+        <li>✅ 左侧预览区：按参考图还原布局和样式</li>
+        <li>✅ 顶部导航：按参考图还原样式</li>
+      </ul>
+    </div>
+
+  <script>
+    function toggleDesign() {
+      const section = document.querySelector('.design-style-section');
+      if (section) {
+        section.style.display = section.style.display === 'none' ? 'block' : 'none';
+      }
+    }
+    
+    function toggleEdit() {
+      const section = document.querySelector('.edit-count-section');
+      if (section) {
+        section.style.display = section.style.display === 'none' ? 'block' : 'none';
+      }
+    }
+    
+    function toggleFeedback() {
+      const section = document.querySelector('.completion-feedback-section');
+      if (section) {
+        section.style.display = section.style.display === 'none' ? 'block' : 'none';
+      }
+    }
+  </script>
+</body>
+</html> 

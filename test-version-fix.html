@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>测试 - 初始版本模块修复</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #000;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .test-container {
+      width: 400px;
+      background: #111;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .version-section {
+      width: 394px;
+      max-width: 640px;
+      flex-direction: column;
+      align-items: flex-start;
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      overflow: visible;
+      padding: 0 20px;
+      box-sizing: border-box;
+      display: flex;
+    }
+    
+    .version-header {
+      display: flex;
+      padding: 12px 0;
+      justify-content: space-between;
+      align-items: center;
+      align-self: stretch;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    
+    .version-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .title-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .title-icon img {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .version-title span {
+      font-size: 15px;
+      color: #ffffff;
+      line-height: 24px;
+    }
+    
+    .version-help {
+      width: 24px;
+      height: 24px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed rgba(255,205,41,0.12);
+      flex-shrink: 0;
+    }
+    
+    .version-help img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+      flex-shrink: 0;
+      max-width: 16px;
+      max-height: 16px;
+      aspect-ratio: 1;
+    }
+    
+    .version-content {
+      display: flex;
+      padding: 12px 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 6px;
+      align-self: stretch;
+    }
+    
+    .content-item {
+      display: flex;
+      padding: 8px 0;
+      gap: 8px;
+      align-items: center;
+      width: 100%;
+      min-height: 24px;
+    }
+    
+    .item-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #ffffff;
+    }
+    
+    .item-icon img {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .item-icon span {
+      font-size: 15px;
+      color: #ffffff;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .content-item span {
+      font-size: 15px;
+      color: #ffffff;
+      line-height: 24px;
+      white-space: nowrap;
+      overflow: visible;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h3>测试 - 初始版本模块</h3>
+    
+    <div class="version-section">
+      <div class="version-header">
+        <div class="version-title">
+          <div class="title-icon">
+            <img src="http://localhost:3845/assets/b28e0fd95f348e33f2b5f091636116f79caac49a.svg" alt="初始版本" style="width: 16px; height: 16px;" />
+          </div>
+          <span>初始版本</span>
+        </div>
+        <div class="version-help">
+          <img src="http://localhost:3845/assets/30e7f0a89c85f030a9c4f1bcf07227413d41076b.svg" alt="帮助" style="width: 16px; height: 16px;" />
+        </div>
+      </div>
+      <div class="version-content">
+        <div class="content-item">
+          <div class="item-icon">
+            <img src="http://localhost:3845/assets/efe7a09156e3e415fce6b0327fe180dafa7b62d2.svg" alt="tag1" style="width: 16px; height: 16px;" />
+          </div>
+          <span>Hero区域展示投资理念</span>
+        </div>
+        <div class="content-item">
+          <div class="item-icon">
+            <span>✻</span>
+          </div>
+          <span>投资组合展示</span>
+        </div>
+        <div class="content-item">
+          <div class="item-icon">
+            <span>✻</span>
+          </div>
+          <span>团队展示</span>
+        </div>
+        <div class="content-item">
+          <div class="item-icon">
+            <span>✻</span>
+          </div>
+          <span>客户成功</span>
+        </div>
+        <div class="content-item">
+          <div class="item-icon">
+            <img src="http://localhost:3845/assets/63d610fe72d86ed2aca078fcab0cd6b4d68638f0.svg" alt="tag2" style="width: 16px; height: 16px;" />
+          </div>
+          <span>关注领域介绍</span>
+        </div>
+        <div class="content-item">
+          <div class="item-icon">
+            <img src="http://localhost:3845/assets/63d610fe72d86ed2aca078fcab0cd6b4d68638f0.svg" alt="tag2" style="width: 16px; height: 16px;" />
+          </div>
+          <span>联系方式</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 
