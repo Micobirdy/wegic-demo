@@ -18,7 +18,7 @@
         </div>
         <div class="preview-content">
           <div class="preview-placeholder" id="previewPlaceholder">
-            <div class="placeholder-text">Your website will appear here...</div>
+            <div class="placeholder-text">Your website will appear here</div>
             <div class="loading-indicator">
               <div class="loading-icon">
                 <img src="./assets/小绿.svg" alt="小绿" style="width: 24px; height: 24px;" />
@@ -45,9 +45,9 @@
         <div class="assistant-content">
           <div class="status-item">
             <div class="status-icon">
-              <img src="./assets/小绿.svg" alt="小绿" style="width: 16px; height: 16px;" />
+              <img src="./assets/小绿.svg" alt="小绿" style="width: 24px; height: 24px;" />
             </div>
-            <span class="status-text">制定实施计划...</span>
+            <span class="status-text">正在制定实施计划</span>
           </div>
 
           <div class="progress-bar">
@@ -62,79 +62,139 @@
               <div class="website-icon website-4" style="background-image: url('./assets/7ddacf2e6b71bd7b3376cfa6c684d60600871483.png')"></div>
               <div class="website-icon website-5" style="background-image: url('./assets/image 141.png')"></div>
             </div>
-            <span class="search-text">检索中...</span>
+            <span class="search-text">正在检索分析</span>
           </div>
 
           <div class="assistant-message">
-            <p>我理解您想要建立一个房地产投资网站来吸引投资者。让我为您创建一个专业的房地产投资平台计划，包括完整的内容设计：</p>
+            <p>我理解您想要建立一个房地产投资网站来吸引投资者。让我为您创建一个专业的房地产投资平台计划，包括完整的内容设计</p>
           </div>
 
           <div class="version-section">
             <div class="version-header">
               <div class="version-title">
                 <div class="title-icon">
-                  <img src="./assets/gettingStarted.svg" alt="初始版本" style="width: 16px; height: 16px;" />
+                  <img src="./assets/gettingStarted.svg" alt="初始版本" style="width: 24px; height: 24px;" />
                 </div>
-                <span>初始版本</span>
+                <span>网站初始版本</span>
               </div>
               <div class="version-help">
-                <img src="http://localhost:3845/assets/30e7f0a89c85f030a9c4f1bcf07227413d41076b.svg" alt="帮助" style="width: 16px; height: 16px;" />
+                <img src="./assets/help & feedback.svg" alt="帮助" style="width: 16px; height: 16px;" />
               </div>
             </div>
             <div class="version-content">
               <div class="content-item">
                 <div class="item-icon">
-                  <img src="http://localhost:3845/assets/efe7a09156e3e415fce6b0327fe180dafa7b62d2.svg" alt="tag1" style="width: 16px; height: 16px;" />
+                  <img src="./assets/Required.svg" alt="tag1" style="width: 24px; height: 24px;" />
                 </div>
                 <span>Hero区域展示投资理念</span>
               </div>
               <div class="content-item">
                 <div class="item-icon">
-                  <span>✻</span>
+                  <img src="./assets/Required.svg" alt="tag1" style="width: 24px; height: 24px;" />
                 </div>
-                <span>投资组合展示</span>
+                <span>投资组合展示区域</span>
               </div>
               <div class="content-item">
                 <div class="item-icon">
-                  <span>✻</span>
+                  <img src="./assets/Required.svg" alt="tag1" style="width: 24px; height: 24px;" />
                 </div>
-                <span>团队展示</span>
+                <span>团队展示区域</span>
               </div>
               <div class="content-item">
                 <div class="item-icon">
-                  <span>✻</span>
+                  <img src="./assets/Required.svg" alt="tag1" style="width: 24px; height: 24px;" />
                 </div>
-                <span>客户成功</span>
+                <span>客户成功案例</span>
               </div>
               <div class="content-item">
                 <div class="item-icon">
-                  <img src="http://localhost:3845/assets/63d610fe72d86ed2aca078fcab0cd6b4d68638f0.svg" alt="tag2" style="width: 16px; height: 16px;" />
+                  <img src="./assets/placeholder.svg" alt="tag2" style="width: 16px; height: 16px;" />
                 </div>
                 <span>关注领域介绍</span>
               </div>
               <div class="content-item">
                 <div class="item-icon">
-                  <img src="http://localhost:3845/assets/63d610fe72d86ed2aca078fcab0cd6b4d68638f0.svg" alt="tag2" style="width: 16px; height: 16px;" />
+                  <img src="./assets/placeholder.svg" alt="tag2" style="width: 16px; height: 16px;" />
                 </div>
-                <span>联系方式</span>
+                <span>联系方式区域</span>
               </div>
             </div>
           </div>
           
           <!-- 设计风格区块 -->
           <div class="design-style-section" style="display: none;">
-            <div class="design-style-content">
-              <div class="design-icon">
-                <img src="./assets/edit.svg" alt="设计风格" style="width: 20px; height: 20px;" />
+            <div class="design-style-header">
+              <div class="design-style-content">
+                <div class="design-icon">
+                  <img src="./assets/edit.svg" alt="设计风格" style="width: 24px; height: 24px;" />
+                </div>
+                <div class="design-text">
+                  <span>设计风格：深色专业主题，配以金色点缀，体现房产行业的权威感</span>
+                </div>
+                <button class="design-dropdown-btn" onclick="toggleDesignStyle()">
+                  <svg width="20" height="20" viewBox="0 0 16 16" fill="none">
+                    <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
               </div>
-              <div class="design-text">
-                <span>设计风格:深色专业主题,配以金色点缀,体现房产行业的权威感。</span>
+            </div>
+            
+            <!-- 展开的设计风格选项 -->
+            <div class="design-style-expanded" id="designStyleExpanded">
+              <div class="style-options">
+                <div class="style-option active" data-style="reweb-light" onclick="selectDesignStyle('reweb-light')">
+                  <div class="style-preview">
+                    <img src="http://localhost:3845/assets/dae8db64fbadb3e0a7ff41002a66d4f51f02edec.svg" alt="Reweb Light" />
+                  </div>
+                  <span class="style-name">Reweb Light</span>
+                </div>
+                <div class="style-option" data-style="reweb-dark" onclick="selectDesignStyle('reweb-dark')">
+                  <div class="style-preview">
+                    <img src="http://localhost:3845/assets/0d625eec34301022389f5ed64a416ea7b76b9224.svg" alt="Reweb Dark" />
+                  </div>
+                  <span class="style-name">Reweb Dark</span>
+                </div>
+                <div class="style-option" data-style="midnight-neon" onclick="selectDesignStyle('midnight-neon')">
+                  <div class="style-preview">
+                    <img src="http://localhost:3845/assets/d41944ee67b99d69a26f23ac9d6b58f3e0c2589a.svg" alt="Midnight Neon" />
+                  </div>
+                  <span class="style-name">Midnight Neon</span>
+                </div>
+                <div class="style-option" data-style="flexoky-dark" onclick="selectDesignStyle('flexoky-dark')">
+                  <div class="style-preview">
+                    <img src="http://localhost:3845/assets/82af1fbd6bf8812c96cf7de3832a43da0ec31a6e.svg" alt="Flexoky Dark" />
+                  </div>
+                  <span class="style-name">Flexoky Dark</span>
+                </div>
               </div>
-              <button class="design-dropdown-btn">
-                <svg width="20" height="20" viewBox="0 0 16 16" fill="none">
-                  <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
+              
+              <!-- 字体预览区域 -->
+              <div class="font-preview-section">
+                <div class="font-preview-item">
+                  <div class="font-label">
+                    <span>标题</span>
+                  </div>
+                  <div class="font-sample">
+                    <span>这是您的段落文本</span>
+                  </div>
+                </div>
+                <div class="font-preview-item">
+                  <div class="font-label">
+                    <span>标题</span>
+                  </div>
+                  <div class="font-sample">
+                    <span>这是您的段落文本</span>
+                  </div>
+                </div>
+                <div class="font-preview-item">
+                  <div class="font-label">
+                    <span>标题</span>
+                  </div>
+                  <div class="font-sample">
+                    <span>这是您的段落文本</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           
@@ -142,9 +202,9 @@
           <div class="edit-count-section" style="display: none;">
             <div class="edit-count-content">
               <div class="edit-icon">
-                <img src="./assets/edit 01.svg" alt="编辑反馈" style="width: 16px; height: 16px;" />
+                <img src="./assets/edit 01.svg" alt="编辑反馈" style="width: 24px; height: 24px;" />
               </div>
-              <span class="edit-text">进行了10次编辑</span>
+              <span class="edit-text">已进行10次编辑优化</span>
               <button class="edit-button">显示所有</button>
             </div>
           </div>
@@ -152,17 +212,68 @@
           <!-- 完成反馈区块 -->
           <div class="completion-feedback-section" style="display: none;">
             <div class="completion-text">
-              <span>已完成!我为您创建了一个专业的房地产市场投资网站,包</span>
-              <span>含完整的内容和现代化设计</span>
+              <span>已完成！我为您创建了一个专业的房地产市场投资网站</span>
+              <span>包含完整的内容和现代化设计</span>
+            </div>
+          </div>
+          
+          <!-- 分割线 -->
+          <div class="section-divider" style="display: none;">
+            <div class="divider-line">
+              <img src="./assets/c451903ee386303e23e6fb5113988b905100d5a5.svg" alt="分割线" style="width: 100%; height: auto;" />
+            </div>
+          </div>
+          
+          <!-- 稍后执行区块 -->
+          <div class="later-execution-section" style="display: none;">
+            <div class="version-header">
+              <div class="version-title">
+                <div class="title-icon">
+                  <img src="./assets/gettingStarted.svg" alt="稍后执行" style="width: 24px; height: 24px;" />
+                </div>
+                <span>稍后执行</span>
+              </div>
+              <div class="version-help">
+                <img src="./assets/help & feedback.svg" alt="帮助" style="width: 16px; height: 16px;" />
+              </div>
+            </div>
+            <div class="version-content">
+              <div class="content-item">
+                <div class="item-icon">
+                  <img src="./assets/Required.svg" alt="tag1" style="width: 24px; height: 24px;" />
+                </div>
+                <span>添加用户认证系统</span>
+              </div>
+              <div class="content-item">
+                <div class="item-icon">
+                  <img src="./assets/Required.svg" alt="tag1" style="width: 24px; height: 24px;" />
+                </div>
+                <span>集成真实房地产数据</span>
+              </div>
+              <div class="content-item">
+                <div class="item-icon">
+                  <img src="./assets/Required.svg" alt="tag1" style="width: 24px; height: 24px;" />
+                </div>
+                <span>添加投资者数据看板和数据跟踪</span>
+              </div>
+              <div class="content-item">
+                <div class="item-icon">
+                  <img src="./assets/placeholder.svg" alt="tag2" style="width: 16px; height: 16px;" />
+                </div>
+                <span>实现在线投资功能</span>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="assistant-footer">
-          <div class="footer-text">💡 检查计划及视觉预览。如果一切看起来都很好，点击开始构建。您也可以通过与我聊天进行修改～</div>
+          <div class="footer-text">
+            <span>💡 检查计划及视觉预览。如果一切看起来都很好，点击开始构建。</span>
+            <span>您也可以通过与我聊天进行修改</span>
+          </div>
           <div class="footer-buttons">
             <button class="pause-btn" onclick="pauseGeneration()">继续对话</button>
-            <button class="generate-btn" onclick="startGeneration()">开始生成</button>
+            <button class="generate-btn" onclick="startGeneration()">开始构建</button>
           </div>
         </div>
       </div>

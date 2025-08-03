@@ -89,19 +89,19 @@ function startSearchProcess() {
   
   // 模拟检索过程
   setTimeout(() => {
-    updateSearchStatus('检索网站1...');
+    updateSearchStatus('正在检索相关网站');
   }, 1000);
   
   setTimeout(() => {
-    updateSearchStatus('检索网站2...');
+    updateSearchStatus('正在分析设计趋势');
   }, 2000);
   
   setTimeout(() => {
-    updateSearchStatus('检索网站3...');
+    updateSearchStatus('正在收集行业信息');
   }, 3000);
   
   setTimeout(() => {
-    updateSearchStatus('检索完成');
+    updateSearchStatus('检索分析完成');
     console.log('检索完成，开始显示其他UI');
     showOtherUI();
   }, 4000); // 检索4秒
@@ -149,13 +149,13 @@ function startAutoGeneration() {
   const generateBtn = document.querySelector('.generate-btn');
   const pauseBtn = document.querySelector('.pause-btn');
   generateBtn.disabled = true;
-  generateBtn.textContent = '生成中...';
+  generateBtn.textContent = '正在构建';
   pauseBtn.textContent = '继续对话';
   
   // 更新底部文本
   const footerText = document.querySelector('.footer-text');
   if (footerText) {
-    footerText.textContent = '正在自动生成您的网站...';
+    footerText.textContent = '正在自动构建您的网站';
   }
   
   // 开始生成过程
@@ -177,7 +177,7 @@ function pauseGeneration() {
   const generateBtn = document.querySelector('.generate-btn');
   const pauseBtn = document.querySelector('.pause-btn');
   generateBtn.disabled = false;
-  generateBtn.textContent = '开始生成';
+  generateBtn.textContent = '开始构建';
   pauseBtn.textContent = '继续对话';
   
   // 清除定时器
@@ -190,14 +190,14 @@ function pauseGeneration() {
 // 生成过程
 function startGenerationProcess() {
   const steps = [
-    { progress: 5, message: '生...', duration: 1200 },
-    { progress: 15, message: '生成中...', duration: 1500 },
-    { progress: 30, message: '生成完成...', duration: 1200 },
-    { progress: 45, message: '验证完成...', duration: 1500 },
-    { progress: 60, message: '设计风格...', duration: 1200 },
-    { progress: 75, message: '编辑优化...', duration: 1200 },
-    { progress: 90, message: '完成...', duration: 1000 },
-    { progress: 100, message: '完成！', duration: 800 }
+    { progress: 5, message: '正在分析您的需求', duration: 1200 },
+    { progress: 15, message: '正在构建网站内容', duration: 1500 },
+    { progress: 30, message: '正在验证设计方案', duration: 1200 },
+    { progress: 45, message: '正在优化用户体验', duration: 1500 },
+    { progress: 60, message: '正在应用设计风格', duration: 1200 },
+    { progress: 75, message: '正在完善细节优化', duration: 1200 },
+    { progress: 90, message: '正在完成最终检查', duration: 1000 },
+    { progress: 100, message: '网站构建完成', duration: 800 }
   ];
   
   let currentStep = 0;
@@ -249,21 +249,8 @@ function startGenerationProcess() {
 function updateStatus(message) {
   const statusText = document.querySelector('.status-text');
   if (statusText) {
-    // 添加打字机效果
-    statusText.textContent = '';
-    statusText.classList.add('typing-effect');
-    
-    let i = 0;
-    const typeWriter = () => {
-      if (i < message.length) {
-        statusText.textContent += message.charAt(i);
-        i++;
-        setTimeout(typeWriter, 50);
-      } else {
-        statusText.classList.remove('typing-effect');
-      }
-    };
-    typeWriter();
+    // 直接更新文本内容
+    statusText.textContent = message;
   }
 }
 
@@ -281,11 +268,11 @@ function updateProgress(progress) {
   const searchText = document.querySelector('.search-text');
   if (searchText) {
     if (progress < 30) {
-      searchText.textContent = '检索中...';
+      searchText.textContent = '正在检索分析';
     } else if (progress < 60) {
-      searchText.textContent = '生成中...';
+      searchText.textContent = '正在生成内容';
     } else if (progress < 90) {
-      searchText.textContent = '优化中...';
+      searchText.textContent = '正在优化设计';
     } else {
       // 检索完成后隐藏文本
       searchText.style.display = 'none';
@@ -310,12 +297,60 @@ function updateSearchStatus(status) {
 function showDesignStyleSection() {
   const designSection = document.querySelector('.design-style-section');
   if (designSection && !designSection.classList.contains('show')) {
-    designSection.style.display = 'block';
+    designSection.style.display = 'flex';
     // 延迟添加show类以触发动画
     setTimeout(() => {
       designSection.classList.add('show');
     }, 50);
     console.log('显示设计风格区块');
+  }
+}
+
+// 切换设计风格展开收起
+function toggleDesignStyle() {
+  const expandedSection = document.getElementById('designStyleExpanded');
+  const dropdownBtn = document.querySelector('.design-dropdown-btn');
+  
+  if (expandedSection && dropdownBtn) {
+    const isExpanded = expandedSection.classList.contains('show');
+    
+    if (isExpanded) {
+      // 收起
+      expandedSection.classList.remove('show');
+      dropdownBtn.classList.remove('expanded');
+    } else {
+      // 展开
+      expandedSection.classList.add('show');
+      dropdownBtn.classList.add('expanded');
+    }
+  }
+}
+
+// 选择设计风格
+function selectDesignStyle(styleName) {
+  // 移除所有active类
+  const styleOptions = document.querySelectorAll('.style-option');
+  styleOptions.forEach(option => {
+    option.classList.remove('active');
+  });
+  
+  // 添加active类到选中的选项
+  const selectedOption = document.querySelector(`[data-style="${styleName}"]`);
+  if (selectedOption) {
+    selectedOption.classList.add('active');
+  }
+  
+  // 更新设计风格文本
+  const designText = document.querySelector('.design-text span');
+  if (designText) {
+    const styleDescriptions = {
+      'reweb-light': '设计风格：浅色现代主题，简洁清爽，适合科技和创意行业',
+      'reweb-dark': '设计风格：深色专业主题，配以金色点缀，体现房产行业的权威感',
+      'midnight-neon': '设计风格：深色霓虹主题，充满未来感，适合游戏和娱乐行业',
+      'flexoky-dark': '设计风格：深色渐变主题，优雅大气，适合金融和商务行业'
+    };
+    
+    designText.textContent = styleDescriptions[styleName] || styleDescriptions['reweb-dark'];
   }
 }
 
@@ -335,6 +370,9 @@ function showEditCountSection() {
 // 显示完成反馈区块
 function showCompletionFeedbackSection() {
   const feedbackSection = document.querySelector('.completion-feedback-section');
+  const sectionDivider = document.querySelector('.section-divider');
+  const laterExecutionSection = document.querySelector('.later-execution-section');
+  
   if (feedbackSection && !feedbackSection.classList.contains('show')) {
     feedbackSection.style.display = 'block';
     // 延迟添加show类以触发动画
@@ -342,6 +380,28 @@ function showCompletionFeedbackSection() {
       feedbackSection.classList.add('show');
     }, 50);
     console.log('显示完成反馈区块');
+  }
+  
+  // 显示分割线
+  if (sectionDivider && !sectionDivider.classList.contains('show')) {
+    setTimeout(() => {
+      sectionDivider.style.display = 'flex';
+      setTimeout(() => {
+        sectionDivider.classList.add('show');
+      }, 50);
+    }, 300);
+    console.log('显示分割线');
+  }
+  
+  // 显示稍后执行区块
+  if (laterExecutionSection && !laterExecutionSection.classList.contains('show')) {
+    setTimeout(() => {
+      laterExecutionSection.style.display = 'flex';
+      setTimeout(() => {
+        laterExecutionSection.classList.add('show');
+      }, 50);
+    }, 600);
+    console.log('显示稍后执行区块');
   }
 }
 
@@ -575,7 +635,7 @@ function completeGeneration() {
   const generateBtn = document.querySelector('.generate-btn');
   const pauseBtn = document.querySelector('.pause-btn');
   generateBtn.disabled = false;
-  generateBtn.textContent = '重新生成';
+  generateBtn.textContent = '开始构建';
   pauseBtn.textContent = '继续对话';
   
   // 清除定时器
@@ -585,12 +645,12 @@ function completeGeneration() {
   }
   
   // 更新最终状态
-  updateStatus('生成完成！');
+  updateStatus('网站构建完成');
   
   // 更新底部文本
   const footerText = document.querySelector('.footer-text');
   if (footerText) {
-    footerText.textContent = '💡 检查计划及视觉预览。如果一切看起来都很好，点击开始构建。您也可以通过与我聊天进行修改～';
+    footerText.textContent = '💡 检查计划及视觉预览。如果一切看起来都很好，点击开始构建。您也可以通过与我聊天进行修改';
   }
   
   // 显示左侧预览内容
@@ -605,7 +665,7 @@ function completeGeneration() {
     }
   }, 500); // 延迟500ms显示，让预览先显示
   
-  console.log('网站生成完成');
+  console.log('网站构建完成');
 }
 
 // 返回首页

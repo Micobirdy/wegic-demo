@@ -4,7 +4,7 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #000;
+  background: #0E0F0F;
   color: #fff;
   overflow: hidden;
   visibility: visible;
@@ -122,7 +122,7 @@ html, body {
 }
 
 .placeholder-text {
-  font-size: 18px;
+  font-size: 14px;
   color: rgba(255,255,255,0.6);
   margin-bottom: 20px;
 }
@@ -192,7 +192,7 @@ html, body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: #111;
+  background: #0E0F0F;
   border-left: 1px solid rgba(255,255,255,0.1);
   transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 2;
@@ -211,6 +211,7 @@ html, body {
   padding: 0 20px;
   height: 48px;
   border-bottom: 1px solid rgba(255,255,255,0.1);
+  background: #0E0F0F;
 }
 
 .diff-section {
@@ -220,7 +221,7 @@ html, body {
 }
 
 .diff-icon {
-  font-size: 16px;
+  font-size: 14px;
   color: #a855f7;
 }
 
@@ -231,7 +232,7 @@ html, body {
 }
 
 .help-icon {
-  font-size: 18px;
+  font-size: 14px;
   color: rgba(255,255,255,0.6);
   cursor: pointer;
 }
@@ -245,6 +246,7 @@ html, body {
   box-sizing: border-box;
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.3) transparent;
+  background: #0E0F0F;
 }
 
 .assistant-content::-webkit-scrollbar {
@@ -288,8 +290,8 @@ html, body {
 }
 
 .status-icon img {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   filter: brightness(1.2);
 }
 
@@ -392,7 +394,7 @@ html, body {
   max-width: 100%;
   flex-direction: column;
   align-items: flex-start;
-  background: rgba(255,255,255,0.06);
+  background: transparent;
   border-radius: 12px;
   border: 1px solid #262626;
   overflow: visible;
@@ -426,6 +428,11 @@ html, body {
   align-items: center;
   align-self: stretch;
   border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: #1C1D1D;
+  margin: 0 -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 12px 12px 0 0;
 }
 
 .version-title {
@@ -443,12 +450,12 @@ html, body {
 }
 
 .title-icon img {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
 }
 
 .version-title span {
-  font-size: 15px;
+  font-size: 14px;
   color: #ffffff;
   line-height: 24px;
 }
@@ -485,6 +492,7 @@ html, body {
   align-items: flex-start;
   gap: 6px;
   align-self: stretch;
+  background: transparent;
 }
 
 .content-item {
@@ -510,17 +518,17 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
+  font-size: 14px;
   color: #ffffff;
 }
 
 .item-icon img {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
 }
 
 .item-icon span {
-  font-size: 15px;
+  font-size: 14px;
   color: #ffffff;
   line-height: 1;
   display: flex;
@@ -529,7 +537,7 @@ html, body {
 }
 
 .content-item span {
-  font-size: 15px;
+  font-size: 14px;
   color: #ffffff;
   line-height: 24px;
   white-space: nowrap;
@@ -540,17 +548,17 @@ html, body {
 .design-style-section {
   margin: 24px 0;
   display: flex;
-  width: calc(394px - 20px);
-  max-width: calc(640px - 20px);
-  padding: 12px;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  width: 400px;
   border-radius: 12px;
   border: 1px solid #262626;
   margin-right: 20px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.4s ease, transform 0.4s ease;
+  background: #0E0F0F;
+  position: relative;
+  overflow: hidden;
 }
 
 .design-style-section.show {
@@ -558,27 +566,32 @@ html, body {
   transform: translateY(0);
 }
 
+.design-style-header {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .design-style-content {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   flex: 1;
   min-width: 0;
 }
 
 .design-icon {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-shrink: 0;
 }
 
 .design-icon img {
-  width: 20px;
-  height: 20px;
-  filter: brightness(0.6);
+  width: 24px;
+  height: 24px;
+  filter: brightness(0.8);
 }
 
 .design-text {
@@ -592,11 +605,10 @@ html, body {
 
 .design-text span {
   font-size: 14px;
-  color: rgba(255,255,255,0.6);
-  line-height: 1.4;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: #ffffff;
+  line-height: 24px;
+  white-space: normal;
+  overflow: visible;
 }
 
 .design-dropdown-btn {
@@ -605,18 +617,182 @@ html, body {
   height: 32px;
   padding: 4px;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-shrink: 0;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.04);
   border: none;
+  border-radius: 6px;
   cursor: pointer;
   margin-left: auto;
+  transition: all 0.2s ease;
+}
+
+.design-dropdown-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .design-dropdown-btn svg {
   width: 20px;
   height: 20px;
   color: rgba(255, 255, 255, 0.6);
+  transition: transform 0.3s ease;
+}
+
+.design-dropdown-btn.expanded svg {
+  transform: rotate(180deg);
+}
+
+/* 展开的设计风格选项 */
+.design-style-expanded {
+  display: none;
+  flex-direction: column;
+  padding: 12px;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.design-style-expanded.show {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 样式选项 */
+.style-options {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: stretch;
+}
+
+.style-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  padding-top: 8px;
+}
+
+.style-option:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.style-option.active {
+  background: rgba(255, 255, 255, 0.04);
+  position: relative;
+}
+
+.style-option:not(.active) {
+  opacity: 0.8;
+}
+
+.style-option:not(.active):hover {
+  opacity: 1;
+}
+
+.style-preview {
+  width: 98px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.style-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.style-name {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.style-option.active .style-name {
+  color: #ffffff;
+}
+
+/* 字体预览区域 */
+.font-preview-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  align-items: stretch;
+}
+
+.font-preview-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding-top: 8px;
+}
+
+.font-preview-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.font-label {
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.font-label span {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.font-sample {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.font-sample span {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+/* 第二个字体预览项使用不同字体 */
+.font-preview-item:nth-child(2) .font-label span,
+.font-preview-item:nth-child(2) .font-sample span {
+  font-family: 'Hahmlet', serif;
+}
+
+/* 第三个字体预览项使用不同字体 */
+.font-preview-item:nth-child(3) .font-label span,
+.font-preview-item:nth-child(3) .font-sample span {
+  font-family: 'Heebo', sans-serif;
 }
 
 /* 编辑次数区块 */
@@ -645,8 +821,8 @@ html, body {
 }
 
 .edit-icon {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -654,13 +830,13 @@ html, body {
 }
 
 .edit-icon img {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   filter: brightness(1);
 }
 
 .edit-text {
-  font-size: 13px;
+  font-size: 14px;
   color: rgba(255,255,255,0.6);
   font-family: "PingFang SC";
   font-style: normal;
@@ -676,7 +852,7 @@ html, body {
   border-radius: 6px;
   flex-shrink: 0;
   color: #ffffff;
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -699,6 +875,60 @@ html, body {
   transform: translateY(0);
 }
 
+/* 分割线样式 */
+.section-divider {
+  margin: 24px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.section-divider.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.divider-line {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0;
+  filter: brightness(0) invert(1);
+}
+
+.divider-line img {
+  width: 60%;
+  height: auto;
+}
+
+/* 稍后执行区块样式 */
+.later-execution-section {
+  margin-bottom: 24px;
+  display: none;
+  width: 100%;
+  max-width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  background: transparent;
+  border-radius: 12px;
+  border: 1px solid #262626;
+  overflow: visible;
+  padding: 0 20px;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.later-execution-section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .completion-text {
   display: flex;
   flex-direction: column;
@@ -707,7 +937,7 @@ html, body {
 
 .completion-text span {
   font-size: 14px;
-  color: rgba(255,255,255,0.6);
+  color: #ffffff;
   line-height: 1.4;
 }
 
@@ -739,6 +969,9 @@ html, body {
   line-height: 1.4;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .footer-buttons {
@@ -804,10 +1037,7 @@ html, body {
   to { width: 100%; }
 }
 
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-}
+
 
 @keyframes fadeInUp {
   from {
@@ -823,8 +1053,7 @@ html, body {
 .typing-effect {
   overflow: hidden;
   white-space: nowrap;
-  border-right: 2px solid #fff;
-  animation: typing 2s steps(40, end), blink 1s infinite;
+  animation: typing 2s steps(40, end);
 }
 
 .status-text {
