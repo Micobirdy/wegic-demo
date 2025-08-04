@@ -38,10 +38,13 @@ function startFullscreenPreview() {
   // 确保预览区全屏显示
   visualPreview.classList.remove('compressed');
   
+  // 添加初始加载动画
+  visualPreview.classList.add('initial-load');
+  
   // 延迟后滑入助手面板
   setTimeout(() => {
     slideInAssistantPanel();
-  }, 800);
+  }, 600); // 减少延迟时间，从1200ms改为600ms
 }
 
 // 滑入助手面板
@@ -51,20 +54,20 @@ function slideInAssistantPanel() {
   
   console.log('开始滑入助手面板');
   
-  // 滑入助手面板
+  // 先滑入助手面板
   assistantPanel.classList.add('slide-in');
   
-  // 压缩预览区
+  // 等待面板滑入动画进行到一半时，开始压缩预览区
   setTimeout(() => {
     console.log('压缩预览区');
     visualPreview.classList.add('compressed');
-  }, 200);
+  }, 250); // 减少延迟时间，从500ms改为250ms
   
-  // 等待抽屉动画完成后先显示检索状态
+  // 等待所有动画完成后开始检索流程
   setTimeout(() => {
     console.log('抽屉动画完成，开始检索流程');
     startSearchProcess();
-  }, 600); // 等待抽屉动画完成
+  }, 600); // 减少等待时间，从1200ms改为600ms
 }
 
 // 开始检索流程
@@ -170,8 +173,8 @@ function startGeneration() {
 
 // 继续对话
 function pauseGeneration() {
-  // 这里可以添加继续对话的逻辑
-  console.log('继续对话功能');
+  // 切换到聊天输入框状态
+  switchToChatInput();
   
   // 更新按钮状态
   const generateBtn = document.querySelector('.generate-btn');
@@ -186,6 +189,82 @@ function pauseGeneration() {
     generationTimer = null;
   }
 }
+
+// 切换到聊天输入框状态
+function switchToChatInput() {
+  const footerContent = document.getElementById('footerContent');
+  const chatContent = document.getElementById('chatContent');
+  const chatInput = document.getElementById('chatInput');
+  
+  // 隐藏按钮内容
+  footerContent.classList.add('hide');
+  
+  // 显示聊天输入框内容
+  setTimeout(() => {
+    footerContent.style.display = 'none';
+    chatContent.style.display = 'block';
+    
+    setTimeout(() => {
+      chatContent.classList.add('show');
+      chatInput.focus(); // 自动聚焦到输入框
+    }, 50);
+  }, 300);
+  
+  console.log('切换到聊天输入框状态');
+}
+
+// 切换回按钮状态
+function switchToButtons() {
+  const footerContent = document.getElementById('footerContent');
+  const chatContent = document.getElementById('chatContent');
+  
+  // 隐藏聊天输入框内容
+  chatContent.classList.remove('show');
+  
+  // 显示按钮内容
+  setTimeout(() => {
+    chatContent.style.display = 'none';
+    footerContent.style.display = 'block';
+    
+    setTimeout(() => {
+      footerContent.classList.remove('hide');
+    }, 50);
+  }, 300);
+  
+  console.log('切换回按钮状态');
+}
+
+// 发送消息
+function sendMessage() {
+  const chatInput = document.getElementById('chatInput');
+  const message = chatInput.value.trim();
+  
+  if (message) {
+    console.log('发送消息:', message);
+    
+    // 这里可以添加发送消息的逻辑
+    // 例如：显示用户消息、调用API等
+    
+    // 清空输入框
+    chatInput.value = '';
+    
+    // 可以在这里添加消息发送后的处理逻辑
+    // 例如：显示AI回复、更新界面等
+  }
+}
+
+// 监听回车键发送消息
+document.addEventListener('DOMContentLoaded', function() {
+  const chatInput = document.getElementById('chatInput');
+  if (chatInput) {
+    chatInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+  }
+});
 
 // 生成过程
 function startGenerationProcess() {
@@ -364,6 +443,32 @@ function showEditCountSection() {
       editSection.classList.add('show');
     }, 50);
     console.log('显示编辑次数区块');
+  }
+}
+
+// 切换编辑历史展开/收起
+function toggleEditHistory() {
+  const expandedSection = document.getElementById('editHistoryExpanded');
+  const editButton = document.querySelector('.edit-button');
+  
+  if (expandedSection && editButton) {
+    const isExpanded = expandedSection.classList.contains('show');
+    
+    if (isExpanded) {
+      // 收起
+      expandedSection.classList.remove('show');
+      setTimeout(() => {
+        expandedSection.style.display = 'none';
+      }, 300);
+      editButton.textContent = '显示所有';
+    } else {
+      // 展开
+      expandedSection.style.display = 'block';
+      setTimeout(() => {
+        expandedSection.classList.add('show');
+      }, 50);
+      editButton.textContent = '收起';
+    }
   }
 }
 

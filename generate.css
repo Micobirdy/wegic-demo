@@ -26,9 +26,7 @@ html, body {
   display: flex;
   position: relative;
   overflow: hidden;
-  border-radius: 20px;
   background: #0E0F0F;
-  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 /* 左侧预览区域 */
@@ -37,25 +35,48 @@ html, body {
   top: 0;
   left: 0;
   display: flex;
-  width: 1070px;
+  width: 100%;
   height: 100%;
   flex-direction: column;
   align-items: center;
   gap: 323px;
-  border-radius: 20px;
+  border-radius: 16px 0 0 16px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: #0E0F0F;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              border-radius 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 1;
-  will-change: width;
+  will-change: width, border-radius, transform, box-shadow;
+  transform: scale(1);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
 
 .visual-preview.compressed {
   width: calc(100% - 440px);
   border-right: 1px solid rgba(255,255,255,0.1);
-  border-radius: 20px;
+  border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: #0E0F0F;
+  transform: scale(1);
+  box-shadow: 4px 0 16px rgba(0, 0, 0, 0.2);
+}
+
+/* 添加预览区域的初始动画效果 */
+.visual-preview.initial-load {
+  animation: previewFadeIn 0.3s ease-out;
+}
+
+@keyframes previewFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .preview-header {
@@ -71,6 +92,7 @@ html, body {
   height: 48px;
   background: #1D1E1E;
   box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.12);
+  border-radius: 20px 20px 0 0;
 }
 
 .preview-label {
@@ -192,16 +214,22 @@ html, body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: #0E0F0F;
-  border-left: 1px solid rgba(255,255,255,0.1);
-  transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background: transparent;
+  transition: right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 2;
   will-change: right;
   overflow: hidden;
+  opacity: 0;
+  transform: translateX(20px);
 }
 
 .assistant-panel.slide-in {
   right: 0;
+  opacity: 1;
+  transform: translateX(0);
+  transition: right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .assistant-header {
@@ -210,8 +238,7 @@ html, body {
   justify-content: space-between;
   padding: 0 20px;
   height: 48px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  background: #0E0F0F;
+  background: transparent;
 }
 
 .diff-section {
@@ -246,7 +273,7 @@ html, body {
   box-sizing: border-box;
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.3) transparent;
-  background: #0E0F0F;
+  background: transparent;
 }
 
 .assistant-content::-webkit-scrollbar {
@@ -307,7 +334,7 @@ html, body {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255,255,255,0.05);
+  background: transparent;
   border-radius: 8px;
   padding: 12px;
   margin-bottom: 24px;
@@ -396,7 +423,7 @@ html, body {
   align-items: flex-start;
   background: transparent;
   border-radius: 12px;
-  border: 1px solid #262626;
+  border: 1px solid rgba(255,255,255,0.1);
   overflow: visible;
   padding: 0 20px;
   box-sizing: border-box;
@@ -428,7 +455,7 @@ html, body {
   align-items: center;
   align-self: stretch;
   border-bottom: 1px solid rgba(255,255,255,0.08);
-  background: #1C1D1D;
+  background: transparent;
   margin: 0 -20px;
   padding-left: 20px;
   padding-right: 20px;
@@ -551,12 +578,12 @@ html, body {
   flex-direction: column;
   width: 400px;
   border-radius: 12px;
-  border: 1px solid #262626;
+  border: 1px solid rgba(255,255,255,0.1);
   margin-right: 20px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.4s ease, transform 0.4s ease;
-  background: #0E0F0F;
+  background: transparent;
   position: relative;
   overflow: hidden;
 }
@@ -852,13 +879,82 @@ html, body {
   border-radius: 6px;
   flex-shrink: 0;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .edit-button:hover {
   background: rgba(255,255,255,0.15);
+}
+
+/* 编辑历史展开区域样式 */
+.edit-history-expanded {
+  margin-top: 16px;
+  background: transparent;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+}
+
+.edit-history-expanded.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.edit-history-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-history-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color 0.2s ease;
+}
+
+.edit-history-item:last-child {
+  border-bottom: none;
+}
+
+.edit-history-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.edit-history-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.edit-history-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.edit-history-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 1.4;
+}
+
+.edit-history-desc {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.4;
 }
 
 /* 完成反馈区块 */
@@ -915,7 +1011,7 @@ html, body {
   align-items: flex-start;
   background: transparent;
   border-radius: 12px;
-  border: 1px solid #262626;
+  border: 1px solid rgba(255,255,255,0.1);
   overflow: visible;
   padding: 0 20px;
   box-sizing: border-box;
@@ -945,9 +1041,7 @@ html, body {
 
 .assistant-footer {
   padding: 20px 20px 20px 20px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.05);
-  border-radius: 8px;
+  background: transparent;
   width: calc(100% - 40px);
   margin: 0 20px;
   box-sizing: border-box;
@@ -1259,4 +1353,146 @@ html, body {
   .assistant-panel.slide-in {
     right: 0;
   }
+} 
+
+/* 底部对话框状态切换动画 */
+.assistant-footer {
+  padding: 20px 20px 20px 20px;
+  background: transparent;
+  width: calc(100% - 40px);
+  margin: 0 20px;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.assistant-footer.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.footer-content,
+.chat-content {
+  width: 100%;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.footer-content.hide,
+.chat-content.hide {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+.footer-content.show,
+.chat-content.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+} 
+
+/* 聊天输入框样式 */
+.chat-input-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 12px 16px;
+  transition: all 0.3s ease;
+}
+
+.chat-input-container:focus-within {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.chat-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 22px;
+  padding: 0;
+  margin: 0;
+  min-height: 20px;
+  resize: none;
+}
+
+.chat-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.chat-input-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 12px;
+}
+
+.chat-target-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  overflow: hidden;
+}
+
+.chat-target-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.chat-target-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.chat-send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #ffffff;
+  border: none;
+  border-radius: 8px;
+  color: #000000;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.chat-send-btn:hover {
+  background: #f5f5f5;
+  transform: translateY(-1px);
+}
+
+.chat-send-btn:active {
+  transform: translateY(0);
+}
+
+.chat-send-btn svg {
+  width: 16px;
+  height: 16px;
+  color: #000000;
 } 

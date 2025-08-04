@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>聊天输入框测试</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:wght@900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="generate.css" />
+  <style>
+    .test-controls {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background: rgba(0,0,0,0.8);
+      padding: 20px;
+      border-radius: 10px;
+      color: white;
+    }
+    
+    .test-controls button {
+      margin: 5px;
+      padding: 10px 15px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .test-controls button:hover {
+      background: #0056b3;
+    }
+    
+    .demo-container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #0E0F0F;
+    }
+    
+    .demo-content {
+      flex: 1;
+      padding: 40px;
+      color: white;
+      text-align: center;
+    }
+    
+    .demo-footer {
+      padding: 20px;
+      background: rgba(255,255,255,0.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="test-controls">
+    <h3>聊天输入框测试</h3>
+    <button onclick="testSwitchToChat()">切换到聊天输入框</button>
+    <button onclick="testSwitchToButtons()">切换回按钮</button>
+    <button onclick="testSendMessage()">测试发送消息</button>
+  </div>
+
+  <div class="demo-container">
+    <div class="demo-content">
+      <h1>聊天输入框功能测试</h1>
+      <p>点击底部的"继续对话"按钮或使用上方控制按钮来测试状态切换</p>
+    </div>
+    
+    <div class="demo-footer">
+      <div class="assistant-footer show" id="assistantFooter">
+        <!-- 按钮状态内容 -->
+        <div class="footer-content show" id="footerContent">
+          <div class="footer-text">
+            <span>💡 检查计划及视觉预览。如果一切看起来都很好，点击开始构建。</span>
+            <span>您也可以通过与我聊天进行修改</span>
+          </div>
+          <div class="footer-buttons">
+            <button class="pause-btn" onclick="pauseGeneration()">继续对话</button>
+            <button class="generate-btn" onclick="startGeneration()">开始构建</button>
+          </div>
+        </div>
+        
+        <!-- 聊天输入框内容 -->
+        <div class="chat-content" id="chatContent" style="display: none;">
+          <div class="chat-input-container">
+            <input type="text" class="chat-input" placeholder="Say what you want and Kimmy will surprise you" id="chatInput">
+            <div class="chat-input-actions">
+              <button class="chat-target-btn" title="目标">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <circle cx="12" cy="12" r="6"></circle>
+                  <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+              </button>
+              <button class="chat-send-btn" title="发送" onclick="sendMessage()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="22,2 11,13 2,9 2,22 9,13 11,13 22,2"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 继续对话
+    function pauseGeneration() {
+      // 切换到聊天输入框状态
+      switchToChatInput();
+    }
+    
+    // 开始构建
+    function startGeneration() {
+      console.log('开始构建');
+    }
+    
+    // 切换到聊天输入框状态
+    function switchToChatInput() {
+      const footerContent = document.getElementById('footerContent');
+      const chatContent = document.getElementById('chatContent');
+      const chatInput = document.getElementById('chatInput');
+      
+      // 隐藏按钮状态
+      footerContent.classList.add('hide');
+      
+      // 显示聊天输入框状态
+      setTimeout(() => {
+        footerContent.style.display = 'none';
+        chatContent.style.display = 'block';
+        
+        setTimeout(() => {
+          chatContent.classList.add('show');
+          chatInput.focus(); // 自动聚焦到输入框
+        }, 50);
+      }, 300);
+      
+      console.log('切换到聊天输入框状态');
+    }
+    
+    // 切换回按钮状态
+    function switchToButtons() {
+      const footerContent = document.getElementById('footerContent');
+      const chatContent = document.getElementById('chatContent');
+      
+      // 隐藏聊天输入框状态
+      chatContent.classList.remove('show');
+      
+      // 显示按钮状态
+      setTimeout(() => {
+        chatContent.style.display = 'none';
+        footerContent.style.display = 'block';
+        
+        setTimeout(() => {
+          footerContent.classList.remove('hide');
+        }, 50);
+      }, 300);
+      
+      console.log('切换回按钮状态');
+    }
+    
+    // 发送消息
+    function sendMessage() {
+      const chatInput = document.getElementById('chatInput');
+      const message = chatInput.value.trim();
+      
+      if (message) {
+        console.log('发送消息:', message);
+        alert(`消息已发送: ${message}`);
+        
+        // 清空输入框
+        chatInput.value = '';
+      }
+    }
+    
+    // 测试函数
+    function testSwitchToChat() {
+      switchToChatInput();
+    }
+    
+    function testSwitchToButtons() {
+      switchToButtons();
+    }
+    
+    function testSendMessage() {
+      const chatInput = document.getElementById('chatInput');
+      chatInput.value = '这是一条测试消息';
+      sendMessage();
+    }
+    
+    // 监听回车键发送消息
+    document.addEventListener('DOMContentLoaded', function() {
+      const chatInput = document.getElementById('chatInput');
+      if (chatInput) {
+        chatInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html> 

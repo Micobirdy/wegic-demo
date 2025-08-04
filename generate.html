@@ -205,7 +205,112 @@
                 <img src="./assets/edit 01.svg" alt="编辑反馈" style="width: 24px; height: 24px;" />
               </div>
               <span class="edit-text">已进行10次编辑优化</span>
-              <button class="edit-button">显示所有</button>
+              <button class="edit-button" onclick="toggleEditHistory()">显示所有</button>
+            </div>
+            
+            <!-- 编辑历史展开区域 -->
+            <div class="edit-history-expanded" id="editHistoryExpanded" style="display: none;">
+              <div class="edit-history-list">
+                <div class="edit-history-item">
+                  <div class="edit-history-icon">
+                    <img src="./assets/Required.svg" alt="编辑" style="width: 16px; height: 16px;" />
+                  </div>
+                  <div class="edit-history-content">
+                    <div class="edit-history-title">引用了 Ant Design 组件库</div>
+                    <div class="edit-history-desc">为页面添加了现代化的UI组件，提升用户体验</div>
+                  </div>
+                </div>
+                
+                <div class="edit-history-item">
+                  <div class="edit-history-icon">
+                    <img src="./assets/Required.svg" alt="编辑" style="width: 16px; height: 16px;" />
+                  </div>
+                  <div class="edit-history-content">
+                    <div class="edit-history-title">调整了 Hero 区域布局</div>
+                    <div class="edit-history-desc">优化了标题和副标题的间距，增强了视觉层次</div>
+                  </div>
+                </div>
+                
+                <div class="edit-history-item">
+                  <div class="edit-history-icon">
+                    <img src="./assets/Required.svg" alt="编辑" style="width: 16px; height: 16px;" />
+                  </div>
+                  <div class="edit-history-content">
+                    <div class="edit-history-title">集成了 Tailwind CSS</div>
+                    <div class="edit-history-desc">使用原子化CSS框架，提高了开发效率和样式一致性</div>
+                  </div>
+                </div>
+                
+                <div class="edit-history-item">
+                  <div class="edit-history-icon">
+                    <img src="./assets/Required.svg" alt="编辑" style="width: 16px; height: 16px;" />
+                  </div>
+                  <div class="edit-history-content">
+                    <div class="edit-history-title">优化了响应式设计</div>
+                    <div class="edit-history-desc">确保在不同设备上都有良好的显示效果</div>
+                  </div>
+                </div>
+                
+                <div class="edit-history-item">
+                  <div class="edit-history-icon">
+                    <img src="./assets/Required.svg" alt="编辑" style="width: 16px; height: 16px;" />
+                  </div>
+                  <div class="edit-history-content">
+                    <div class="edit-history-title">添加了动画效果</div>
+                    <div class="edit-history-desc">使用 Framer Motion 为页面元素添加了流畅的过渡动画</div>
+                  </div>
+                </div>
+                
+                <div class="edit-history-item">
+                  <div class="edit-history-icon">
+                    <img src="./assets/Required.svg" alt="编辑" style="width: 16px; height: 16px;" />
+                  </div>
+                  <div class="edit-history-content">
+                    <div class="edit-history-title">优化了颜色方案</div>
+                    <div class="edit-history-desc">调整了主色调和辅助色，提升了品牌一致性</div>
+                  </div>
+                </div>
+                
+                <div class="edit-history-item">
+                  <div class="edit-history-icon">
+                    <img src="./assets/Required.svg" alt="编辑" style="width: 16px; height: 16px;" />
+                  </div>
+                  <div class="edit-history-content">
+                    <div class="edit-history-title">改进了导航结构</div>
+                    <div class="edit-history-desc">重新组织了页面导航，提高了用户浏览效率</div>
+                  </div>
+                </div>
+                
+                <div class="edit-history-item">
+                  <div class="edit-history-icon">
+                    <img src="./assets/Required.svg" alt="编辑" style="width: 16px; height: 16px;" />
+                  </div>
+                  <div class="edit-history-content">
+                    <div class="edit-history-title">添加了数据可视化</div>
+                    <div class="edit-history-desc">集成了 Chart.js 库，展示投资数据和统计信息</div>
+                  </div>
+                </div>
+                
+                <div class="edit-history-item">
+                  <div class="edit-history-icon">
+                    <img src="./assets/Required.svg" alt="编辑" style="width: 16px; height: 16px;" />
+                  </div>
+                  <div class="edit-history-content">
+                    <div class="edit-history-title">优化了表单交互</div>
+                    <div class="edit-history-desc">改进了表单验证和用户反馈机制</div>
+                  </div>
+                </div>
+                
+                <div class="edit-history-item">
+                  <div class="edit-history-icon">
+                    <img src="./assets/Required.svg" alt="编辑" style="width: 16px; height: 16px;" />
+                  </div>
+                  <div class="edit-history-content">
+                    <div class="edit-history-title">完善了错误处理</div>
+                    <div class="edit-history-desc">添加了完善的错误边界和用户友好的错误提示</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           
@@ -266,14 +371,38 @@
           </div>
         </div>
 
-        <div class="assistant-footer">
-          <div class="footer-text">
-            <span>💡 检查计划及视觉预览。如果一切看起来都很好，点击开始构建。</span>
-            <span>您也可以通过与我聊天进行修改</span>
+        <div class="assistant-footer" id="assistantFooter">
+          <!-- 按钮状态内容 -->
+          <div class="footer-content" id="footerContent">
+            <div class="footer-text">
+              <span>💡 检查计划及视觉预览。如果一切看起来都很好，点击开始构建。</span>
+              <span>您也可以通过与我聊天进行修改</span>
+            </div>
+            <div class="footer-buttons">
+              <button class="pause-btn" onclick="pauseGeneration()">继续对话</button>
+              <button class="generate-btn" onclick="startGeneration()">开始构建</button>
+            </div>
           </div>
-          <div class="footer-buttons">
-            <button class="pause-btn" onclick="pauseGeneration()">继续对话</button>
-            <button class="generate-btn" onclick="startGeneration()">开始构建</button>
+          
+          <!-- 聊天输入框内容 -->
+          <div class="chat-content" id="chatContent" style="display: none;">
+            <div class="chat-input-container">
+              <input type="text" class="chat-input" placeholder="Say what you want and Kimmy will surprise you" id="chatInput">
+              <div class="chat-input-actions">
+                <button class="chat-target-btn" title="目标">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="6"></circle>
+                    <circle cx="12" cy="12" r="2"></circle>
+                  </svg>
+                </button>
+                <button class="chat-send-btn" title="发送" onclick="sendMessage()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="22,2 11,13 2,9 2,22 9,13 11,13 22,2"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

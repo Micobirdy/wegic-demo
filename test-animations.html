@@ -2,421 +2,154 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <title>测试 - 动效修改</title>
+  <title>动画效果测试</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:wght@900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="generate.css" />
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #000;
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      height: 100vh;
-      overflow: hidden;
-    }
-    
-    .page-wrapper {
-      display: flex;
-      height: 100vh;
-      position: relative;
-    }
-    
-    .visual-preview {
-      flex: 1;
-      background: #000;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .assistant-panel {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 440px;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background: #111;
-      border-left: 1px solid rgba(255,255,255,0.1);
-      overflow: hidden;
-    }
-    
-    .assistant-content {
-      flex: 1;
-      padding: 20px 20px 72px 20px;
-      overflow-y: auto;
-      overflow-x: hidden;
-      width: 100%;
-      box-sizing: border-box;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255,255,255,0.3) transparent;
-    }
-    
-    .assistant-content::-webkit-scrollbar {
-      width: 4px;
-    }
-    
-    .assistant-content::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    
-    .assistant-content::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.3);
-      border-radius: 2px;
-    }
-    
-    .assistant-content::-webkit-scrollbar-thumb:hover {
-      background: rgba(255,255,255,0.5);
-    }
-    
-    .status-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 16px;
-      width: 100%;
-      box-sizing: border-box;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    
-    .status-item.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .status-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .status-icon img {
-      width: 16px;
-      height: 16px;
-      filter: brightness(1.2);
-    }
-    
-    .status-text {
-      font-size: 14px;
-      color: rgba(255,255,255,0.8);
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      flex: 1;
-    }
-    
-    .search-box {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 20px;
-      width: 100%;
-      box-sizing: border-box;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    
-    .search-box.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .search-websites {
-      display: flex;
-      align-items: center;
-      position: relative;
-    }
-    
-    .website-icon {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background-size: cover;
-      background-position: center;
-      border: 2px solid #111;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .website-icon.website-1 {
-      z-index: 3;
-    }
-    
-    .website-icon.website-2 {
-      margin-left: -8px;
-      z-index: 2;
-    }
-    
-    .website-icon.website-3 {
-      margin-left: -8px;
-      z-index: 1;
-    }
-    
-    .search-text {
-      font-size: 14px;
-      color: rgba(255,255,255,0.8);
-      margin-left: 12px;
-    }
-    
-    .assistant-message {
-      margin-bottom: 24px;
-      display: none;
-      width: 100%;
-      box-sizing: border-box;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    
-    .assistant-message.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .assistant-message p {
-      font-size: 14px;
-      line-height: 1.6;
-      color: rgba(255,255,255,0.8);
-      margin: 0;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-    
-    .version-section {
-      margin-bottom: 20px;
-      display: none;
-      width: 100%;
-      max-width: 100%;
-      flex-direction: column;
-      align-items: flex-start;
-      background: rgba(255,255,255,0.06);
-      border-radius: 12px;
-      border: 1px solid #262626;
-      overflow: visible;
-      padding: 0 20px;
-      box-sizing: border-box;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    
-    .version-section.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
     .test-controls {
       position: fixed;
       top: 20px;
       left: 20px;
       z-index: 1000;
+      background: rgba(0,0,0,0.8);
+      padding: 20px;
+      border-radius: 10px;
+      color: white;
     }
     
-    .test-btn {
-      background: #10b981;
+    .test-controls button {
+      margin: 5px;
+      padding: 10px 15px;
+      background: #007bff;
       color: white;
       border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
+      border-radius: 5px;
       cursor: pointer;
-      margin: 5px;
-      font-size: 12px;
     }
     
-    .test-btn:hover {
-      background: #059669;
-    }
-    
-    .debug-info {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: rgba(0,0,0,0.8);
-      padding: 15px;
-      border-radius: 8px;
-      font-size: 12px;
-      max-width: 300px;
-    }
-    
-    .debug-info h4 {
-      margin: 0 0 10px 0;
-      color: #10b981;
-    }
-    
-    .debug-info ul {
-      margin: 0;
-      padding-left: 20px;
-    }
-    
-    .debug-info li {
-      margin-bottom: 5px;
+    .test-controls button:hover {
+      background: #0056b3;
     }
   </style>
 </head>
 <body>
-  <div class="page-wrapper">
-    <div class="visual-preview">
-      <div style="padding: 40px; text-align: center;">
-        <h2>左侧预览区域</h2>
-        <p>这里会显示生成的网站预览</p>
-      </div>
-    </div>
-    
-    <div class="assistant-panel">
-      <div class="assistant-content">
-        <div class="status-item">
-          <div class="status-icon">
-            <img src="http://localhost:3845/assets/8b79510b152145dbbbed5ae11cc4a35ce1012651.svg" alt="status" />
-          </div>
-          <div class="status-text">正在分析您的需求...</div>
-        </div>
-        
-        <div class="search-box">
-          <div class="search-websites">
-            <div class="website-icon website-1" style="background-color: #10b981;"></div>
-            <div class="website-icon website-2" style="background-color: #3b82f6;"></div>
-            <div class="website-icon website-3" style="background-color: #f59e0b;"></div>
-          </div>
-          <div class="search-text">检索中...</div>
-        </div>
-        
-        <div class="assistant-message">
-          <p>根据您的需求，我为您创建了一个专业的房地产市场投资网站。网站包含以下核心功能：</p>
-        </div>
-        
-        <div class="version-section">
-          <div class="version-header">
-            <div class="version-title">
-              <div class="title-icon">
-                <img src="./assets/gettingStarted.svg" alt="初始版本" style="width: 20px; height: 20px;" />
-              </div>
-              <span>初始版本</span>
-            </div>
-            <div class="version-help">
-              <img src="http://localhost:3845/assets/30e7f0a89c85f030a9c4f1bcf07227413d41076b.svg" alt="帮助" style="width: 16px; height: 16px;" />
-            </div>
-          </div>
-          <div class="version-content">
-            <div class="content-item">
-              <div class="item-icon">
-                <img src="http://localhost:3845/assets/efe7a09156e3e415fce6b0327fe180dafa7b62d2.svg" alt="tag1" style="width: 16px; height: 16px;" />
-              </div>
-              <span>Hero区域展示投资理念</span>
-            </div>
-            <div class="content-item">
-              <div class="item-icon">
-                <span>✻</span>
-              </div>
-              <span>投资组合展示</span>
-            </div>
-            <div class="content-item">
-              <div class="item-icon">
-                <span>✻</span>
-              </div>
-              <span>团队展示</span>
-            </div>
-            <div class="content-item">
-              <div class="item-icon">
-                <span>✻</span>
-              </div>
-              <span>客户成功</span>
-            </div>
-            <div class="content-item">
-              <div class="item-icon">
-                <img src="http://localhost:3845/assets/63d610fe72d86ed2aca078fcab0cd6b4d68638f0.svg" alt="tag2" style="width: 16px; height: 16px;" />
-              </div>
-              <span>关注领域介绍</span>
-            </div>
-            <div class="content-item">
-              <div class="item-icon">
-                <img src="http://localhost:3845/assets/63d610fe72d86ed2aca078fcab0cd6b4d68638f0.svg" alt="tag2" style="width: 16px; height: 16px;" />
-              </div>
-              <span>联系方式</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
   <div class="test-controls">
-    <button class="test-btn" onclick="testSearchBox()">测试搜索框</button>
-    <button class="test-btn" onclick="testStatusItem()">测试状态项</button>
-    <button class="test-btn" onclick="testAssistantMessage()">测试助手消息</button>
-    <button class="test-btn" onclick="testVersionSection()">测试版本区块</button>
-    <button class="test-btn" onclick="testAllAnimations()">测试所有动效</button>
+    <h3>动画测试控制</h3>
+    <button onclick="resetAnimation()">重置动画</button>
+    <button onclick="startAnimation()">开始动画</button>
+    <button onclick="testCompression()">测试挤压</button>
   </div>
-  
-  <div class="debug-info">
-    <h4>动效修改测试</h4>
-    <ul>
-      <li>✅ 底部预留：72px (20px + 52px)</li>
-      <li>✅ 搜索框：向上顶动效</li>
-      <li>✅ 状态项：向上顶动效</li>
-      <li>✅ 助手消息：向上顶动效</li>
-      <li>✅ 版本区块：向上顶动效</li>
-      <li>✅ 依次出现：300ms间隔</li>
-      <li>✅ 过渡效果：0.4s ease</li>
-    </ul>
+
+  <div class="main-container">
+    <div class="page-wrapper">
+      <!-- 左侧预览区域 -->
+      <div class="visual-preview" id="visualPreview">
+        <div class="preview-header">
+          <span class="preview-label">Visual preview</span>
+        </div>
+        <div class="preview-content">
+          <div class="preview-placeholder" id="previewPlaceholder">
+            <div class="placeholder-text">Your website will appear here</div>
+            <div class="loading-indicator">
+              <div class="loading-icon">
+                <img src="./assets/小绿.svg" alt="小绿" style="width: 24px; height: 24px;" />
+              </div>
+              <span class="loading-text">Designing visual preview</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右侧助手面板 -->
+      <div class="assistant-panel" id="assistantPanel">
+        <div class="assistant-header">
+          <div class="diff-section">
+            <span class="diff-icon">🔍</span>
+            <span class="diff-text">Diff</span>
+          </div>
+          <div class="help-icon">?</div>
+        </div>
+
+        <div class="assistant-content">
+          <div class="status-item">
+            <div class="status-icon">
+              <img src="./assets/小绿.svg" alt="小绿" style="width: 24px; height: 24px;" />
+            </div>
+            <span class="status-text">正在制定实施计划</span>
+          </div>
+
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+
+          <div class="search-box">
+            <div class="search-websites">
+              <div class="website-icon website-1" style="background-image: url('./assets/512b7c633d3e95e7ca63021ac7f5bae9ea258756.png')"></div>
+              <div class="website-icon website-2" style="background-image: url('./assets/abbe8790392df10a9c0239020b212bcbaef44c59.png')"></div>
+              <div class="website-icon website-3" style="background-image: url('./assets/cba5f8c00d9b19527d581bb76eb25f2dd9269541.png')"></div>
+              <div class="website-icon website-4" style="background-image: url('./assets/7ddacf2e6b71bd7b3376cfa6c684d60600871483.png')"></div>
+              <div class="website-icon website-5" style="background-image: url('./assets/image 141.png')"></div>
+            </div>
+            <span class="search-text">正在检索分析</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
-    function testSearchBox() {
-      const searchBox = document.querySelector('.search-box');
-      searchBox.style.display = 'flex';
-      setTimeout(() => {
-        searchBox.classList.add('show');
-      }, 50);
-    }
-    
-    function testStatusItem() {
-      const statusItem = document.querySelector('.status-item');
-      statusItem.style.display = 'flex';
-      setTimeout(() => {
-        statusItem.classList.add('show');
-      }, 50);
-    }
-    
-    function testAssistantMessage() {
-      const message = document.querySelector('.assistant-message');
-      message.style.display = 'block';
-      setTimeout(() => {
-        message.classList.add('show');
-      }, 50);
-    }
-    
-    function testVersionSection() {
-      const section = document.querySelector('.version-section');
-      section.style.display = 'flex';
-      setTimeout(() => {
-        section.classList.add('show');
-      }, 50);
-    }
-    
-    function testAllAnimations() {
-      const elements = [
-        { selector: '.search-box', display: 'flex' },
-        { selector: '.status-item', display: 'flex' },
-        { selector: '.assistant-message', display: 'block' },
-        { selector: '.version-section', display: 'flex' }
-      ];
+    function resetAnimation() {
+      const visualPreview = document.getElementById('visualPreview');
+      const assistantPanel = document.getElementById('assistantPanel');
       
-      elements.forEach((element, index) => {
-        setTimeout(() => {
-          const el = document.querySelector(element.selector);
-          if (el) {
-            el.style.display = element.display;
-            setTimeout(() => {
-              el.classList.add('show');
-            }, 50);
-          }
-        }, index * 300);
-      });
+      visualPreview.classList.remove('compressed', 'initial-load');
+      assistantPanel.classList.remove('slide-in');
+      
+      console.log('动画已重置');
     }
+    
+    function startAnimation() {
+      const visualPreview = document.getElementById('visualPreview');
+      const assistantPanel = document.getElementById('assistantPanel');
+      
+      // 重置状态
+      resetAnimation();
+      
+      // 添加初始加载动画
+      visualPreview.classList.add('initial-load');
+      
+      // 延迟后开始滑入动画
+      setTimeout(() => {
+        assistantPanel.classList.add('slide-in');
+        
+        setTimeout(() => {
+          visualPreview.classList.add('compressed');
+        }, 250);
+      }, 600);
+      
+      console.log('开始动画序列');
+    }
+    
+    function testCompression() {
+      const visualPreview = document.getElementById('visualPreview');
+      const assistantPanel = document.getElementById('assistantPanel');
+      
+      // 直接测试挤压效果
+      assistantPanel.classList.add('slide-in');
+      visualPreview.classList.add('compressed');
+      
+      console.log('测试挤压效果');
+    }
+    
+    // 页面加载完成后自动开始动画
+    window.addEventListener('load', function() {
+      console.log('页面加载完成，3秒后自动开始动画');
+      setTimeout(() => {
+        startAnimation();
+      }, 3000);
+    });
   </script>
 </body>
 </html> 
