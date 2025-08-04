@@ -25,7 +25,7 @@ html, body {
   width: calc(100vw - 40px);
   display: flex;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   background: #0E0F0F;
 }
 
@@ -40,7 +40,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   gap: 323px;
-  border-radius: 16px 0 0 16px;
+  border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: #0E0F0F;
   transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
@@ -56,7 +56,7 @@ html, body {
 .visual-preview.compressed {
   width: calc(100% - 440px);
   border-right: 1px solid rgba(255,255,255,0.1);
-  border-radius: 16px;
+  border-radius: 16px 0 0 16px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: #0E0F0F;
   transform: scale(1);
@@ -92,7 +92,7 @@ html, body {
   height: 48px;
   background: #1D1E1E;
   box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.12);
-  border-radius: 20px 20px 0 0;
+  border-radius: 16px 16px 0 0;
 }
 
 .preview-label {
@@ -111,7 +111,7 @@ html, body {
   position: relative;
   padding-top: 48px;
   margin: 0;
-  height: 100%;
+  height: calc(100% - 48px);
   scrollbar-width: thin;
   scrollbar-color: rgba(0,0,0,0.3) transparent;
   scroll-behavior: smooth;
@@ -233,12 +233,7 @@ html, body {
 }
 
 .assistant-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  height: 48px;
-  background: transparent;
+  display: none;
 }
 
 .diff-section {
