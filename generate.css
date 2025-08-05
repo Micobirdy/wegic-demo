@@ -56,7 +56,7 @@ html, body {
 .visual-preview.compressed {
   width: calc(100% - 440px);
   border-right: 1px solid rgba(255,255,255,0.1);
-  border-radius: 16px 0 0 16px;
+  border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: #0E0F0F;
   transform: scale(1);
@@ -261,7 +261,7 @@ html, body {
 
 .assistant-content {
   flex: 1;
-  padding: 20px 20px 72px 20px;
+  padding: 20px 0 72px 20px;  /* 改为：上20px 右0px 下72px 左20px */
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
@@ -1039,8 +1039,8 @@ html, body {
   background: rgba(255,255,255,0.05);
   border: 1px dashed rgba(255,255,255,0.2);
   border-radius: 12px;
-  width: calc(100% - 40px);
-  margin: 0 20px;
+  width: 100%;
+  margin: 0;
   box-sizing: border-box;
   opacity: 0;
   transform: translateY(100%);
@@ -1359,8 +1359,8 @@ html, body {
   background: rgba(255,255,255,0.05);
   border: 1px dashed rgba(255,255,255,0.2);
   border-radius: 12px;
-  width: calc(100% - 40px);
-  margin: 0 20px;
+  width: 100%;
+  margin: 0;
   box-sizing: border-box;
   opacity: 0;
   transform: translateY(100%);
